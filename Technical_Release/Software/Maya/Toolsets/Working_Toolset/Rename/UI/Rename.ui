@@ -1,0 +1,1202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainWindow</class>
+ <widget class="QMainWindow" name="mainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>380</width>
+    <height>780</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(34, 34, 34);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="lbl_author">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>694</y>
+      <width>68</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>9</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:9pt &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>@HuangFei</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_Rename">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>6</y>
+      <width>113</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>12</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:12pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Rename mode:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="dsb_Start">
+    <property name="geometry">
+     <rect>
+      <x>63</x>
+      <y>72</y>
+      <width>80</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkb_Hierachy">
+    <property name="geometry">
+     <rect>
+      <x>14</x>
+      <y>504</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift Light SemiCondensed</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);</string>
+    </property>
+    <property name="text">
+     <string>Hierarchy</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkb_Selected">
+    <property name="geometry">
+     <rect>
+      <x>144</x>
+      <y>504</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift Light SemiCondensed</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);</string>
+    </property>
+    <property name="text">
+     <string>Selected</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkb_All">
+    <property name="geometry">
+     <rect>
+      <x>284</x>
+      <y>504</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift Light SemiCondensed</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);</string>
+    </property>
+    <property name="text">
+     <string>All</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_reNum">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>102</y>
+      <width>360</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 10px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Rename and Number</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>271</y>
+      <width>360</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_FirstChar">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>221</y>
+      <width>160</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 10px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>First Character --&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_LastChar">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>221</y>
+      <width>160</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 10px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;-- Last Character</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="txt_HashRename">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>317</y>
+      <width>280</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="txt_AddBefore">
+    <property name="geometry">
+     <rect>
+      <x>67</x>
+      <y>143</y>
+      <width>220</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="txt_Rename">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>37</y>
+      <width>360</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_Start">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>74</y>
+      <width>49</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);</string>
+    </property>
+    <property name="text">
+     <string>Start:</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="dsb_Padding">
+    <property name="geometry">
+     <rect>
+      <x>287</x>
+      <y>72</y>
+      <width>80</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_Padding">
+    <property name="geometry">
+     <rect>
+      <x>227</x>
+      <y>73</y>
+      <width>49</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);</string>
+    </property>
+    <property name="text">
+     <string>Padding:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_HashRename">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>287</y>
+      <width>130</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>12</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:12pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Hash Rename:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_Rename">
+    <property name="geometry">
+     <rect>
+      <x>295</x>
+      <y>311</y>
+      <width>74</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 10px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Rename</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="txt_AddAfter">
+    <property name="geometry">
+     <rect>
+      <x>67</x>
+      <y>181</y>
+      <width>220</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_Before">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>147</y>
+      <width>53</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>(Before)</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_After">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>185</y>
+      <width>53</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>(After)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_addBefore">
+    <property name="geometry">
+     <rect>
+      <x>293</x>
+      <y>142</y>
+      <width>74</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 10px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_addAfter">
+    <property name="geometry">
+     <rect>
+      <x>294</x>
+      <y>180</y>
+      <width>74</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 10px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="txt_Search">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>416</y>
+      <width>270</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="txt_Replace">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>470</y>
+      <width>270</width>
+      <height>30</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>357</y>
+      <width>360</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_Search">
+    <property name="geometry">
+     <rect>
+      <x>11</x>
+      <y>393</y>
+      <width>53</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Search:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_Replace">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>449</y>
+      <width>53</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Replace:</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>535</y>
+      <width>360</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_Pre_01">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>581</y>
+      <width>56</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Grp_</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_Pre_02">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>581</y>
+      <width>56</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>MI_</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_Pre_03">
+    <property name="geometry">
+     <rect>
+      <x>131</x>
+      <y>580</y>
+      <width>56</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>SM_</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_Pre_04">
+    <property name="geometry">
+     <rect>
+      <x>191</x>
+      <y>580</y>
+      <width>56</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>SKM_</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_Pre_05">
+    <property name="geometry">
+     <rect>
+      <x>251</x>
+      <y>580</y>
+      <width>56</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>_pkg</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_Pre_06">
+    <property name="geometry">
+     <rect>
+      <x>311</x>
+      <y>580</y>
+      <width>56</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>More</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_Prefix">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>560</y>
+      <width>53</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Prefix_ :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_Package">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>621</y>
+      <width>54</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Package:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_FAQsAll">
+    <property name="geometry">
+     <rect>
+      <x>338</x>
+      <y>6</y>
+      <width>25</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>?</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_FAQsSearch">
+    <property name="geometry">
+     <rect>
+      <x>341</x>
+      <y>388</y>
+      <width>25</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>?</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_FAQsAddPrefix">
+    <property name="geometry">
+     <rect>
+      <x>338</x>
+      <y>549</y>
+      <width>25</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>?</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_pkgSort">
+    <property name="geometry">
+     <rect>
+      <x>87</x>
+      <y>616</y>
+      <width>280</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Sort Large to Small Topo</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_pkgCleanGroup">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>656</y>
+      <width>168</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Clean Group</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_pkgReset">
+    <property name="geometry">
+     <rect>
+      <x>187</x>
+      <y>656</y>
+      <width>181</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Reset</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_FAQsHash">
+    <property name="geometry">
+     <rect>
+      <x>342</x>
+      <y>287</y>
+      <width>25</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>?</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkb_1">
+    <property name="geometry">
+     <rect>
+      <x>205</x>
+      <y>6</y>
+      <width>32</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift Light SemiCondensed</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);</string>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkb_2">
+    <property name="geometry">
+     <rect>
+      <x>246</x>
+      <y>6</y>
+      <width>32</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift Light SemiCondensed</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);</string>
+    </property>
+    <property name="text">
+     <string>2</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chkb_3">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>6</y>
+      <width>32</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift Light SemiCondensed</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);</string>
+    </property>
+    <property name="text">
+     <string>3</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_Replace">
+    <property name="geometry">
+     <rect>
+      <x>283</x>
+      <y>418</y>
+      <width>80</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 10px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Replace</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>380</width>
+     <height>33</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>10</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>10</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>false</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>false</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

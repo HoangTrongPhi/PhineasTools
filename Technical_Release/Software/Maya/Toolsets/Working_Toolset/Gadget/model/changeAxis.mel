@@ -1,0 +1,6 @@
+string $curAxis = `upAxis -q -axis`; 
+ if ($curAxis == "y") 
+ setUpAxis "z"; 
+ else if ($curAxis == "z") 
+ setUpAxis "y"; 
+ viewManip -v true;

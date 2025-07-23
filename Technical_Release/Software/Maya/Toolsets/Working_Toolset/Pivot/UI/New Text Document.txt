@@ -1,0 +1,44 @@
+    def getPivot(self):
+        getPivotPosition()
+
+    def setPivot(self):
+        setPivotPosition()
+
+    def centerBottomPivot(self):
+        centerBottomPivot()
+
+    def centerTopPivot(self):
+        centerTopPivot()
+
+    def centerPivot(self):
+        centerPivot()
+
+    def pivotOriginal(self):
+        pivotOriginal()
+
+    def setXmin(self):
+        setXmin()
+
+    def setXmid(self):
+        setXmid()
+
+    def setXmax(self):
+        setXmax()
+
+    def setYmin(self):
+        setYmin()
+
+    def setYmid(self):
+        setYmid()
+
+    def setYmax(self):
+        setYmax()
+
+    def setZmin(self):
+        setZmin()
+
+    def setZmid(self):
+        setZmid()
+
+    def setZmax(self):
+        setZmax()

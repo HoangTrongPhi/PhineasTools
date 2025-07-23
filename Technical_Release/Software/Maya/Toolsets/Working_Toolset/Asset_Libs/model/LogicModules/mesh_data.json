@@ -1,0 +1,18 @@
+{
+    "SM_Triangle.fbx": {
+        "triangle_count": 80,
+        "file_path": "P:/demo/1.7.2025\\SM_Triangle_A_pkg_01.fbx"
+    },
+    "linhkien_a.fbx": {
+        "triangle_count": 506,
+        "file_path": "P:/Phineas_3D_model_libs/Only_model/LinhKien\\linhkien_a.fbx"
+    },
+    "linhkien_b.fbx": {
+        "triangle_count": 1607,
+        "file_path": "P:/Phineas_3D_model_libs/Only_model/LinhKien\\linhkien_b.fbx"
+    },
+    "linhkien_c.fbx": {
+        "triangle_count": 780,
+        "file_path": "P:/Phineas_3D_model_libs/Only_model/LinhKien\\linhkien_c.fbx"
+    }
+}
