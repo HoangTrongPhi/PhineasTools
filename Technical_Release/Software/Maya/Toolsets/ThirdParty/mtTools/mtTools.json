@@ -1,0 +1,17 @@
+{
+    "useGifTooltips": true,
+    "UVSnapshotResX": 5,
+    "UVSnapshotResY": 5,
+    "ExportPath": "C:/MT.fbx/",
+    "useBakeGroups": true,
+    "ExplodeStep": 100,
+    "RadialInstanceCount": 6,
+    "InstanceAroundOrigin": true,
+    "windowSizeX": 347,
+    "windowSizeY": 649,
+    "bgColor": {
+        "r": 119,
+        "g": 208,
+        "b": 241
+    }
+}

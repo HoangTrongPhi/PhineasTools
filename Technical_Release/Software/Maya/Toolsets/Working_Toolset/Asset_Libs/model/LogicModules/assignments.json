@@ -1,5 +1,7 @@
 {
-    "linhkien_a": "low",
-    "linhkien_b": "low",
-    "linhkien_c": "high"
+    "table": "All",
+    "PC": "All",
+    "Room": "All",
+    "keyboard": "All",
+    "monitor": "All"
 }

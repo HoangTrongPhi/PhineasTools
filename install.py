@@ -31,7 +31,7 @@ def update_envs():
 
     print(f"[INFO] Da set xong MayaTools Path: {MAYA_TOOLSETS_PATH}")
 
-# ---- 3. Tự động copy icons và shelves (giống file MEL cũ) ----
+# ---- 3. Tự động copy icons và shelves  ----
 def check_path(path):
     if os.path.exists(path):
         return True

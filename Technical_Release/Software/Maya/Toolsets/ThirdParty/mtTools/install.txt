@@ -1,0 +1,38 @@
+
+mtTools 
+Matt Taylor
+
+MIT No-Resale License
+
+Copyright (c) 2025 Matt Taylor
+
+Permission is hereby granted, free of charge, to any person obtaining a copy  
+of this software and associated documentation files (the "Software"), to deal  
+in the Software without restriction, including without limitation the rights  
+to use, copy, modify, merge, publish, and distribute copies of the Software,  
+**but NOT to sell or repackage it for commercial distribution**.  
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  
+
+THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND.
+
+>>>>>>>>>>>>>>>>>>>>>Installing the tool<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Tested on Maya 2022 - 2025
+
+1.Drop the mtTools folder into your Maya scripts folder ( %USERPROFILE%\Documents\maya\scripts )
+2.Relaunch Maya
+3.Paste the Python code below into your script editor and press the execute button ► to launch the tool and add the shelf
+
+
+import importlib
+import sys
+import os
+
+sys.path.append(os.environ['USERPROFILE'] + '/Documents/maya/scripts/mtTools/')
+import mtTools.mtTools as mtTools
+importlib.reload(mtTools)
+mtTools.showUI()
+mtTools.shelf.Start() #Remove this line if you don't want the shelf
+
+
+

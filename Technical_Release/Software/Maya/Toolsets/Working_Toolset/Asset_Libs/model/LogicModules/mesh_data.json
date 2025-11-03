@@ -3,16 +3,24 @@
         "triangle_count": 80,
         "file_path": "P:/demo/1.7.2025\\SM_Triangle_A_pkg_01.fbx"
     },
-    "linhkien_a.fbx": {
-        "triangle_count": 506,
-        "file_path": "P:/Phineas_3D_model_libs/Only_model/LinhKien\\linhkien_a.fbx"
+    "table.fbx": {
+        "triangle_count": 3732,
+        "file_path": "P:/Phineas_3D_model_libs/Only_model/MyRoom\\table.fbx"
     },
-    "linhkien_b.fbx": {
-        "triangle_count": 1607,
-        "file_path": "P:/Phineas_3D_model_libs/Only_model/LinhKien\\linhkien_b.fbx"
+    "PC.fbx": {
+        "triangle_count": 9898,
+        "file_path": "P:/Phineas_3D_model_libs/Only_model/MyRoom\\PC.fbx"
     },
-    "linhkien_c.fbx": {
-        "triangle_count": 780,
-        "file_path": "P:/Phineas_3D_model_libs/Only_model/LinhKien\\linhkien_c.fbx"
+    "Room.fbx": {
+        "triangle_count": 540,
+        "file_path": "P:/Phineas_3D_model_libs/Only_model/MyRoom\\Room.fbx"
+    },
+    "keyboard.fbx": {
+        "triangle_count": 2242,
+        "file_path": "P:/Phineas_3D_model_libs/Only_model/MyRoom\\keyboard.fbx"
+    },
+    "monitor.fbx": {
+        "triangle_count": 140,
+        "file_path": "P:/Phineas_3D_model_libs/Only_model/MyRoom\\monitor.fbx"
     }
 }
