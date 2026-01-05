@@ -22,5 +22,9 @@
     "monitor.fbx": {
         "triangle_count": 140,
         "file_path": "P:/Phineas_3D_model_libs/Only_model/MyRoom\\monitor.fbx"
+    },
+    "Cube_1.fbx": {
+        "triangle_count": 12,
+        "file_path": "P:/Phineas_LIB/Maya_AssetLib/Test\\Cube_1.fbx"
     }
 }
