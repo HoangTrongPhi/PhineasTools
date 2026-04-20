@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>RG_PivotTool_mainWindow</class>
- <widget class="QMainWindow" name="RG_PivotTool_mainWindow">
+ <class>PivotTool</class>
+ <widget class="QMainWindow" name="PivotTool">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    <string notr="true">background-color: rgb(34, 34, 34);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="RG_author">
+   <widget class="QLabel" name="author">
     <property name="geometry">
      <rect>
       <x>12</x>
@@ -586,7 +586,7 @@ border-radius: 10px;
      <string>Center Pivot</string>
     </property>
    </widget>
-   <widget class="QLabel" name="RG_label_1">
+   <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
       <x>12</x>
@@ -612,7 +612,7 @@ font: 63 12pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
      <string>Copy Pivot Position</string>
     </property>
    </widget>
-   <widget class="QLabel" name="RG_label_2">
+   <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -651,7 +651,7 @@ font: 63 12pt &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
      <enum>Qt::Orientation::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="RG_label_3">
+   <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
       <x>10</x>

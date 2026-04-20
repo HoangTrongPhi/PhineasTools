@@ -36,7 +36,7 @@ def getDirectoryofModule(modulename):
     except:
         pass
 
-    currWD = CommonPyFunction.Get_WD(module.__file__)
+    currWD = os.path.dirname(module.__file__)
     return currWD
 
 

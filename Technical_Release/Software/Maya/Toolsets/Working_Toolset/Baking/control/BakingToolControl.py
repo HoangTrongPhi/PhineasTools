@@ -72,7 +72,7 @@ class BakingToolControl(QtWidgets.QMainWindow):
         """
         super(BakingToolControl, self).__init__(parent=parent)
 
-        # Tạo một instance của lớp UI từ file MeshPosition.py
+        # Tạo một instance của lớp UI từ file BakingTool.py
         # Dùng phương thức setupUi để áp dụng giao diện vào QMainWindow này
         self.ui = BakeTool.Ui_mainWindow()
         self.ui.setupUi(self)

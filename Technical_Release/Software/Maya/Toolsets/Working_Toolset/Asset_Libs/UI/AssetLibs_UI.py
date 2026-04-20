@@ -22,7 +22,11 @@ QCoreApplication = QtCore.QCoreApplication
 QMetaObject = QtCore.QMetaObject
 Qt = QtCore.Qt
 QLayout = QtWidgets.QLayout
-QAction = QtWidgets.QAction
+try:
+    QAction = QtGui.QAction  # thay bằng PySide6.QtGui thay vì QtWidgets
+except:
+    QAction = QtWidgets.QAction
+
 QComboBox = QtWidgets.QComboBox
 QListView = QtWidgets.QListView
 QTreeView = QtWidgets.QTreeView

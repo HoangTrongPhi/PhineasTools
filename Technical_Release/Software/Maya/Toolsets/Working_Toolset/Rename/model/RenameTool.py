@@ -3,7 +3,7 @@
 import sys, os, json
 import importlib
 import Common.Python.CommonPyFunction as CommonPyFunction
-importlib.reload(CommonPyFunction)
+#importlib.reload(CommonPyFunction)
 
 try:
     from shiboken2 import wrapInstance
