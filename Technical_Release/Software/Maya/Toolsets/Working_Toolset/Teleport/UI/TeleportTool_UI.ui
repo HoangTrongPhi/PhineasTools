@@ -529,7 +529,7 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
      <string>TELEPORT TO ENGINE</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnImptMayaEngine">
+   <widget class="QPushButton" name="btnUnrealToMaya">
     <property name="geometry">
      <rect>
       <x>25</x>
@@ -728,6 +728,41 @@ border-radius: 8px;
     </property>
     <property name="text">
      <string>Mat</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnUnityToMaya">
+    <property name="geometry">
+     <rect>
+      <x>25</x>
+      <y>501</y>
+      <width>119</width>
+      <height>44</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 8px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Import to Maya</string>
     </property>
    </widget>
   </widget>

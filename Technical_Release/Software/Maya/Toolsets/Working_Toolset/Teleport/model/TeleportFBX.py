@@ -21,6 +21,13 @@ username = getpass.getuser()
 mainPath = 'C:/tempMaya/ExportFBX/'
 pathSharing = 'C:/tempMaya/ExportFBX/Share/'
 
+blenderPath = 'C:/tempMaya/ExportFBX/Blender/'
+MayaPath = 'C:/tempMaya/ExportFBX/Maya/'
+
+# engine
+UnrealPath = 'C:/tempMaya/ExportFBX/Unreal/'
+UnityPath = 'C:/tempMaya/ExportFBX/Unity/'
+
 # Kiểm tra và tạo folder mặc định
 if not os.path.exists(pathSharing):
     try:
@@ -67,12 +74,22 @@ def ExportFBXOption(filename, FBXversion='FBX202000', FBXASCII=True, unit='cm', 
 
 def exportFBX():
     if cmds.ls(sl=True):
-        name = f'{username}_Maya.fbx'
+        name = f'{username}_Custom.fbx'
         fbxPath = os.path.join(mainPath, name)
         CommonPyFunction.Make_dir(mainPath)
         ExportFBXOption(fbxPath)
     else:
         cmds.warning("Chưa chọn object để export!")
+
+def exportToBlender():
+    if cmds.ls(sl=True):
+        name = f'{username}_Maya.fbx'
+        fbxPath = os.path.join(MayaPath, name)
+        CommonPyFunction.Make_dir(MayaPath)
+        ExportFBXOption(fbxPath)
+    else:
+        cmds.warning("Chưa chọn object để export!")
+
 
 
 def exportFBXSharing():
@@ -119,5 +136,71 @@ def importFBXOption(filename, unlockNormals=True):
     mel.eval('FBXImportShowUI -v false;')
     mel.eval(f'FBXImport -file "{filename}";')
 
+    print("Import thành công !!!")
 
+
+def blenderToMaya():
+    name = f'{username}_Blender.fbx'
+    fbxPath = os.path.join(blenderPath, name)
+    if os.path.exists(fbxPath):
+        CommonPyFunction.Make_dir(blenderPath)
+        importFBXOption(fbxPath)
+    else:
+        cmds.warning(" Không có file nào để import !!!")
+
+
+def unrealToMaya():
+    name = f'{username}_Unreal.fbx'
+    fbxPath = os.path.join(UnrealPath, name)
+    if os.path.exists(fbxPath):
+        CommonPyFunction.Make_dir(UnrealPath)
+        importFBXOption(fbxPath)
+    else:
+        cmds.warning(" Không có file nào để import !!!")
+
+def unityToMaya():
+    name = f'{username}_Unity.fbx'
+    fbxPath = os.path.join(UnityPath, name)
+    if os.path.exists(fbxPath):
+        CommonPyFunction.Make_dir(UnityPath)
+        importFBXOption(fbxPath)
+    else:
+        cmds.warning(" Không có file nào để import !!!")
+
+
+def clean_gs_junk():
+    # Tìm tất cả junk group (bao gồm cả nested)
+    junk_nodes = cmds.ls(type="transform", long=True) or []
+    junk_nodes = [j for j in junk_nodes if "gsJunkGroup" in j]
+
+    # Sort depth (deepest first để tránh lỗi hierarchy)
+    junk_nodes.sort(key=lambda x: x.count("|"), reverse=True)
+
+    for junk in junk_nodes:
+        if not cmds.objExists(junk):
+            continue
+
+        children = cmds.listRelatives(junk, children=True, fullPath=True) or []
+
+        for child in children:
+            try:
+                # Unparent ra world
+                cmds.parent(child, world=True)
+            except:
+                pass
+
+        try:
+            cmds.delete(junk)
+        except:
+            pass
+
+    # Clean thêm transform rác (identity)
+    all_transforms = cmds.ls(type="transform", long=True) or []
+    for node in all_transforms:
+        try:
+            # bỏ qua camera default
+            if cmds.listRelatives(node, shapes=True):
+                cmds.makeIdentity(node, apply=True, t=True, r=True, s=True, n=False)
+        except:
+            pass
 

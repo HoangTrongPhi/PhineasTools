@@ -7,6 +7,7 @@
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
+
 from Common.qt_compat import QtWidgets, QtCore, QtGui, QtUiTools, wrapInstance
 
 QWidget = QtWidgets.QWidget
@@ -36,7 +37,6 @@ QCheckBox = QtWidgets.QCheckBox
 QStatusBar = QtWidgets.QStatusBar
 QFont = QtGui.QFont
 QTextEdit = QtWidgets.QTextEdit
-
 
 class Ui_mainWindow(object):
     def setupUi(self, mainWindow):
@@ -317,10 +317,10 @@ class Ui_mainWindow(object):
         self.label_TeleEngine.setFont(font2)
         self.label_TeleEngine.setStyleSheet(u"color: rgb(128, 200, 255);\n"
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
-        self.btnImptMayaEngine = QPushButton(self.centralwidget)
-        self.btnImptMayaEngine.setObjectName(u"btnImptMayaEngine")
-        self.btnImptMayaEngine.setGeometry(QRect(25, 449, 119, 44))
-        self.btnImptMayaEngine.setStyleSheet(u"QPushButton {\n"
+        self.btnUnrealToMaya = QPushButton(self.centralwidget)
+        self.btnUnrealToMaya.setObjectName(u"btnUnrealToMaya")
+        self.btnUnrealToMaya.setGeometry(QRect(25, 449, 119, 44))
+        self.btnUnrealToMaya.setStyleSheet(u"QPushButton {\n"
 "font:12pt \"Bahnschrift SemiBold SemiConden\";\n"
 "color: rgb(34, 34, 34);\n"
 "background-color: rgb(125, 125, 125);\n"
@@ -440,6 +440,29 @@ class Ui_mainWindow(object):
 "border-radius: 8px;\n"
 "}\n"
 "")
+        self.btnUnityToMaya = QPushButton(self.centralwidget)
+        self.btnUnityToMaya.setObjectName(u"btnUnityToMaya")
+        self.btnUnityToMaya.setGeometry(QRect(25, 501, 119, 44))
+        self.btnUnityToMaya.setStyleSheet(u"QPushButton {\n"
+"font:12pt \"Bahnschrift SemiBold SemiConden\";\n"
+"color: rgb(34, 34, 34);\n"
+"background-color: rgb(125, 125, 125);\n"
+"\n"
+"border: 1px solid rgb(24, 103, 155);\n"
+"border-radius: 8px;\n"
+" }\n"
+"QPushButton:hover{\n"
+"background-color:  rgb(125, 125, 125);\n"
+"border: 3px solid rgb(24, 103, 155);\n"
+"border-radius: 8px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"background-color:rgb(74, 74, 74);\n"
+"border: 3px solid rgb(24, 103, 155);\n"
+"border-radius: 8px;\n"
+"}\n"
+"")
         mainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(mainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -472,11 +495,12 @@ class Ui_mainWindow(object):
         self.btnImptShare.setText(QCoreApplication.translate("mainWindow", u"Import SHARE", None))
         self.btnShareExplore.setText(QCoreApplication.translate("mainWindow", u"Explore", None))
         self.label_TeleEngine.setText(QCoreApplication.translate("mainWindow", u"TELEPORT TO ENGINE", None))
-        self.btnImptMayaEngine.setText(QCoreApplication.translate("mainWindow", u"Import to Maya", None))
+        self.btnUnrealToMaya.setText(QCoreApplication.translate("mainWindow", u"Import to Maya", None))
         self.btnExptUE.setText(QCoreApplication.translate("mainWindow", u"Export to Unreal", None))
         self.btnFAQs_export_2.setText(QCoreApplication.translate("mainWindow", u"?", None))
         self.btnExptUnity.setText(QCoreApplication.translate("mainWindow", u"Export to UNITY", None))
         self.btnEnginePath.setText(QCoreApplication.translate("mainWindow", u"path", None))
         self.btnMaterialsTool.setText(QCoreApplication.translate("mainWindow", u"Mat", None))
+        self.btnUnityToMaya.setText(QCoreApplication.translate("mainWindow", u"Import to Maya", None))
     # retranslateUi
 

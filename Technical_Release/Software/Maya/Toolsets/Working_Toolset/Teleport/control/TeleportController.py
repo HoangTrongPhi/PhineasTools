@@ -24,9 +24,14 @@ importlib.reload(CommonPyFunction)
 import Common.CommonHelpers as CommonHelpers
 importlib.reload(CommonHelpers)
 
-# Import file UI đã được convert
+#file UI
 import Software.Maya.Toolsets.Working_Toolset.Teleport.UI.TeleportTool_UI as TeleportTool_UI
 importlib.reload(TeleportTool_UI)
+
+#file model
+import Software.Maya.Toolsets.Working_Toolset.Teleport.model.TeleportFBX as TeleportFBX
+importlib.reload(TeleportFBX)
+
 
 def getDirectoryofModule(modulename):
     """
@@ -70,8 +75,8 @@ class Teleport_Controller(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
 
         # Đặt một objectName duy nhất để dễ dàng tìm và đóng cửa sổ cũ
-        self.setObjectName("UL_Controller_window")
-        self.setWindowTitle("UL_Controller")
+        self.setObjectName("Teleport_Controller_window")
+        self.setWindowTitle("Teleport_Controller")
 
         # Các phương thức createWidgets và createLayouts không cần thiết
         # vì self.ui.setupUi(self) đã tạo tất cả widget và layout.
@@ -104,16 +109,45 @@ class Teleport_Controller(QtWidgets.QMainWindow):
         """
         Kết nối các nút bấm và widget khác với các hàm xử lý.
         """
-        #self.ui.btn_slots_function.clicked.connect(self.slots_function)
+        self.ui.btExptBlender.clicked.connect(self.exportToBlender)
+        self.ui.btnImptMaya.clicked.connect(self.importToMaya)
+        self.ui.btnUnityToMaya.clicked.connect(self.fromUnityToMaya)
+        self.ui.btnUnrealToMaya.clicked.connect(self.fromUnrealToMaya)
 
 
-    # ============== SLOTS ==============
-    # Các hàm này sẽ được gọi khi người dùng tương tác với giao diện.
-    # Viết logic xử lý cho Maya vào đây.
-    # ===================================
+    def exportToBlender(self):
+        TeleportFBX.exportToBlender()
 
-    def slots_function(self):
+    def importToMaya(self):
+        TeleportFBX.blenderToMaya()
+
+    def folderSavePath(self):
         pass
+    def objExport(self):
+        pass
+
+    def usdExport(self):
+        pass
+    def openExplorer(self):
+        pass
+
+    def ExportShare(self):
+        TeleportFBX.exportFBXSharing()
+
+    def importShare(self):
+        pass
+
+    def shareExplorer(self):
+        pass
+
+    def fromUnityToMaya(self):
+        TeleportFBX.unityToMaya()
+        TeleportFBX.clean_gs_junk()
+
+    def fromUnrealToMaya(self):
+        TeleportFBX.unrealToMaya()
+        TeleportFBX.clean_gs_junk()
+
 
 
 def openWindow():
@@ -133,6 +167,5 @@ def openWindow():
     mainWin.show()
     return mainWin
 
-
-
 openWindow()
+
