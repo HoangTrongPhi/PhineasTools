@@ -17,7 +17,7 @@
    <string notr="true">background-color: rgb(34, 34, 34);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="RG_author">
+   <widget class="QLabel" name="author">
     <property name="geometry">
      <rect>
       <x>12</x>
@@ -46,7 +46,7 @@ font: 63 9pt &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
    <widget class="QPushButton" name="btnGetPosition">
     <property name="geometry">
      <rect>
-      <x>9</x>
+      <x>6</x>
       <y>50</y>
       <width>171</width>
       <height>42</height>
@@ -75,13 +75,13 @@ border-radius: 10px;
 </string>
     </property>
     <property name="text">
-     <string>Get Position</string>
+     <string>Import to Maya</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnSetPosition">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>187</x>
       <y>50</y>
       <width>159</width>
       <height>41</height>
@@ -109,14 +109,14 @@ border-radius: 10px;
 </string>
     </property>
     <property name="text">
-     <string>Set Position</string>
+     <string>Export to Blender</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnSetXmin">
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>301</y>
+      <y>373</y>
       <width>102</width>
       <height>32</height>
      </rect>
@@ -147,81 +147,11 @@ border-radius: 10px;
      <string>Set Xmin</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnSetXmid">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>301</y>
-      <width>113</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-font: 63 12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
-color: rgb(34, 34, 34);
-background-color:  rgb(170, 80, 107);
-
-border: 1px solid rgb(24, 103, 155);
-border-radius: 10px;
- }
-QPushButton:hover{
-background-color:   rgb(170, 80, 107);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-
-QPushButton:pressed{
-background-color: rgb(169, 23, 27);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Set Xmid</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnSetXmax">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>301</y>
-      <width>107</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-font: 63 12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
-color: rgb(34, 34, 34);
-background-color:  rgb(170, 80, 107);
-
-border: 1px solid rgb(24, 103, 155);
-border-radius: 10px;
- }
-QPushButton:hover{
-background-color:   rgb(170, 80, 107);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-
-QPushButton:pressed{
-background-color: rgb(169, 23, 27);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Set Xmax</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnSetYmin">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>341</y>
+      <x>120</x>
+      <y>373</y>
       <width>102</width>
       <height>32</height>
      </rect>
@@ -252,116 +182,11 @@ border-radius: 10px;
      <string>Set Ymin</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnSetYmid">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>341</y>
-      <width>112</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-font: 63 12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
-color: rgb(34, 34, 34);
-background-color: rgb(80, 170, 89);
-
-border: 1px solid rgb(24, 103, 155);
-border-radius: 10px;
- }
-QPushButton:hover{
-background-color: rgb(80, 170, 89);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-
-QPushButton:pressed{
-background-color: rgb(180, 220, 103);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Set Ymid</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnSetYmax">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>341</y>
-      <width>107</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-font: 63 12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
-color: rgb(34, 34, 34);
-background-color: rgb(80, 170, 89);
-
-border: 1px solid rgb(24, 103, 155);
-border-radius: 10px;
- }
-QPushButton:hover{
-background-color: rgb(80, 170, 89);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-
-QPushButton:pressed{
-background-color: rgb(180, 220, 103);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Set Ymax</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnSetZmax">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>380</y>
-      <width>107</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-font: 63 12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
-color: rgb(34, 34, 34);
-background-color:  rgb(109, 141, 185);
-
-border: 1px solid rgb(24, 103, 155);
-border-radius: 10px;
- }
-QPushButton:hover{
-background-color:   rgb(109, 141, 185);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-
-QPushButton:pressed{
-background-color: rgb(87, 138, 207);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Set Zmax</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnSetZmin">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>379</y>
+      <x>265</x>
+      <y>370</y>
       <width>100</width>
       <height>35</height>
      </rect>
@@ -392,46 +217,11 @@ border-radius: 10px;
      <string>Set Zmin</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnSetZmid">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>380</y>
-      <width>113</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-font: 63 12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
-color: rgb(34, 34, 34);
-background-color:  rgb(109, 141, 185);
-
-border: 1px solid rgb(24, 103, 155);
-border-radius: 10px;
- }
-QPushButton:hover{
-background-color:   rgb(109, 141, 185);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-
-QPushButton:pressed{
-background-color: rgb(87, 138, 207);
-border: 3px solid rgb(24, 103, 155);
-border-radius: 10px;
-}
-</string>
-    </property>
-    <property name="text">
-     <string>Set Zmid</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnCenBotPivot">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>201</y>
+      <x>7</x>
+      <y>200</y>
       <width>169</width>
       <height>42</height>
      </rect>
@@ -468,24 +258,11 @@ border-radius: 10px;
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="Line" name="line">
-    <property name="geometry">
-     <rect>
-      <x>13</x>
-      <y>250</y>
-      <width>331</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Orientation::Horizontal</enum>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnCenTopPivot">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>200</y>
+      <x>187</x>
+      <y>199</y>
       <width>158</width>
       <height>44</height>
      </rect>
@@ -519,8 +296,8 @@ border-radius: 10px;
    <widget class="QPushButton" name="btnPivotOriginal">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>153</y>
+      <x>187</x>
+      <y>152</y>
       <width>159</width>
       <height>39</height>
      </rect>
@@ -554,8 +331,8 @@ border-radius: 10px;
    <widget class="QPushButton" name="btnCenterPivot">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>153</y>
+      <x>7</x>
+      <y>152</y>
       <width>169</width>
       <height>39</height>
      </rect>
@@ -586,7 +363,7 @@ border-radius: 10px;
      <string>Center Pivot</string>
     </property>
    </widget>
-   <widget class="QLabel" name="RG_label_1">
+   <widget class="QLabel" name="label_1">
     <property name="geometry">
      <rect>
       <x>12</x>
@@ -609,14 +386,14 @@ border-radius: 10px;
 font: 63 12pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
     </property>
     <property name="text">
-     <string>Copy Pivot Position</string>
+     <string>Maya  &lt;-&gt;  Blender</string>
     </property>
    </widget>
-   <widget class="QLabel" name="RG_label_2">
+   <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>120</y>
+      <y>310</y>
       <width>332</width>
       <height>20</height>
      </rect>
@@ -642,39 +419,13 @@ font: 63 12pt &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
+      <y>260</y>
       <width>332</width>
       <height>20</height>
      </rect>
     </property>
     <property name="orientation">
      <enum>Qt::Orientation::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="RG_label_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>270</y>
-      <width>332</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Bahnschrift SemiBold SemiConden</family>
-      <pointsize>12</pointsize>
-      <italic>false</italic>
-      <kerning>false</kerning>
-      <fontweight></fontweight>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(128, 200, 255);
-font: 63 12pt &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
-    </property>
-    <property name="text">
-     <string>Advanced Pivot Position</string>
     </property>
    </widget>
   </widget>

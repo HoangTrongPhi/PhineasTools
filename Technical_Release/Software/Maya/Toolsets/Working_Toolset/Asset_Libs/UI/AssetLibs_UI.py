@@ -3,34 +3,35 @@
 ################################################################################
 ## Form generated from reading UI file 'AssetLibs_UI.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.1
+## Created by: Qt User Interface Compiler version 5.15.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
-#------- PyQt/PySide imports ----------
+
 from Common.qt_compat import QtWidgets, QtCore, QtGui, QtUiTools, wrapInstance
-try:
-    QAction = QtWidgets.QAction
-except AttributeError:
-    QAction = QtGui.QAction
+from Software.Maya.Toolsets.Working_Toolset.Rename.UI.Rename import QCheckBox
+
 QWidget = QtWidgets.QWidget
-QListView = QtWidgets.QListView
-QTreeView = QtWidgets.QTreeView
+QFrame = QtWidgets.QFrame
+QSizePolicy = QtWidgets.QSizePolicy
+QVBoxLayout = QtWidgets.QVBoxLayout
 QLabel = QtWidgets.QLabel
-QTableWidget = QtWidgets.QTableWidget
-QTableWidgetItem = QtWidgets.QTableWidgetItem
-QComboBox = QtWidgets.QComboBox
 QPushButton = QtWidgets.QPushButton
-QRadioButton = QtWidgets.QRadioButton
-QCheckBox = QtWidgets.QCheckBox
 QRect = QtCore.QRect
 QCoreApplication = QtCore.QCoreApplication
-QSizePolicy = QtWidgets.QSizePolicy
-QStatusBar = QtWidgets.QStatusBar
-QMenuBar = QtWidgets.QMenuBar
-QMenu  = QtWidgets.QMenu
 QMetaObject = QtCore.QMetaObject
-
+Qt = QtCore.Qt
+QLayout = QtWidgets.QLayout
+QAction = QtWidgets.QAction
+QComboBox = QtWidgets.QComboBox
+QListView = QtWidgets.QListView
+QTreeView = QtWidgets.QTreeView
+QTableWidget = QtWidgets.QTableWidget
+QRadioButton = QtWidgets.QRadioButton
+QMenuBar = QtWidgets.QMenuBar
+QMenu = QtWidgets.QMenu
+QCheckBox = QtWidgets.QCheckBox
+QStatusBar = QtWidgets.QStatusBar
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -117,7 +118,7 @@ class Ui_MainWindow(object):
         self.tableWidget.verticalHeader().setMinimumSectionSize(192)
         self.cbb_tableView = QComboBox(self.centralwidget)
         self.cbb_tableView.setObjectName(u"cbb_tableView")
-        self.cbb_tableView.setGeometry(QRect(548, 2, 320, 32))
+        self.cbb_tableView.setGeometry(QRect(577, 2, 291, 32))
         self.cbb_tableView.setStyleSheet(u"QComboBox {\n"
 "	color: rgb(128, 200, 255);\n"
 "	background-color: rgb(36, 36, 36); \n"
@@ -175,7 +176,7 @@ class Ui_MainWindow(object):
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
         self.rbtn_USD = QRadioButton(self.centralwidget)
         self.rbtn_USD.setObjectName(u"rbtn_USD")
-        self.rbtn_USD.setGeometry(QRect(491, 14, 50, 20))
+        self.rbtn_USD.setGeometry(QRect(491, 14, 61, 20))
         self.rbtn_USD.setStyleSheet(u"color: rgb(128, 200, 255);\n"
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
         self.rbtn_All = QRadioButton(self.centralwidget)
@@ -214,8 +215,8 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuHelp.menuAction())
         self.menuFile.addAction(self.actionSet_Library_Path)
         self.menuFile.addAction(self.actionRefresh)
-        self.menuFile.addAction(self.actionOpenExplore)
         self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionOpenExplore)
         self.menuFile.addAction(self.actionComming_Soon)
         self.menuView.addAction(self.actionSort_All_With_FBX)
         self.menuView.addAction(self.actionSort_All_with_OBJ)
@@ -254,7 +255,7 @@ class Ui_MainWindow(object):
         self.lbl_FAQs.setText(QCoreApplication.translate("MainWindow", u"tip: C\u00f3 th\u1ec3 t\u1ea1o folder theo ng\u00e0y, version, qu\u1ea3n l\u00fd categories theo t\u1eebng ph\u1ea7n c\u1ee7a project", None))
         self.rbtn_FBX.setText(QCoreApplication.translate("MainWindow", u"FBX", None))
         self.rbtn_OBJ.setText(QCoreApplication.translate("MainWindow", u"OBJ", None))
-        self.rbtn_USD.setText(QCoreApplication.translate("MainWindow", u"USD", None))
+        self.rbtn_USD.setText(QCoreApplication.translate("MainWindow", u"USDZ", None))
         self.rbtn_All.setText(QCoreApplication.translate("MainWindow", u"ALL", None))
         self.lbl_Filter_type.setText(QCoreApplication.translate("MainWindow", u"Filter type:", None))
         self.ckb_treeFolder.setText(QCoreApplication.translate("MainWindow", u"Sort wtih folder", None))

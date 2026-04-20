@@ -126,9 +126,9 @@ QTableWidget {
    <widget class="QComboBox" name="cbb_tableView">
     <property name="geometry">
      <rect>
-      <x>548</x>
+      <x>577</x>
       <y>2</y>
-      <width>320</width>
+      <width>291</width>
       <height>32</height>
      </rect>
     </property>
@@ -267,7 +267,7 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
      <rect>
       <x>491</x>
       <y>14</y>
-      <width>50</width>
+      <width>61</width>
       <height>20</height>
      </rect>
     </property>
@@ -276,7 +276,7 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
 font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
     </property>
     <property name="text">
-     <string>USD</string>
+     <string>USDZ</string>
     </property>
    </widget>
    <widget class="QRadioButton" name="rbtn_All">
@@ -350,8 +350,8 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
     </property>
     <addaction name="actionSet_Library_Path"/>
     <addaction name="actionRefresh"/>
-    <addaction name="actionOpenExplore"/>
     <addaction name="separator"/>
+    <addaction name="actionOpenExplore"/>
     <addaction name="actionComming_Soon"/>
    </widget>
    <widget class="QMenu" name="menuView">

@@ -6,6 +6,7 @@ import maya.cmds as cmds
 import os
 import sys
 import json
+import subprocess
 
 import gc   # bắt maya xóa GUI thừa, giải phóng bộ nhớ garbage clear
 from maya import OpenMayaUI as omui
@@ -168,6 +169,9 @@ class Asset_Libs_Control(QtWidgets.QMainWindow):
 
         # --------- sort with folder tree view ---------
         self.ui.ckb_treeFolder.stateChanged.connect(self.handle_treefolder_checkbox)
+
+        # Connect openExplore action
+        self.ui.actionOpenExplore.triggered.connect(self.openExplore)
 
     def table_Widget(self, category):
         if hasattr(self, 'asset_tabler'):
@@ -393,7 +397,7 @@ class Asset_Libs_Control(QtWidgets.QMainWindow):
         asset_folder = Config.Configuration.get_asset_library_path()
         if not os.path.exists(asset_folder):
             QtWidgets.QMessageBox.warning(self, "Error", "Đường dẫn Asset Library không tồn tại!")
-            return
+            QtWidgets.QMessageBox.warning(self, "Attention", "Hãy thiết lập lại đường dẫn thư viện Asset")
 
         # 2. Lấy lại assignments mới nhất từ file
         assignments_dict = Config.Configuration.get_assignments_dict()
@@ -408,7 +412,13 @@ class Asset_Libs_Control(QtWidgets.QMainWindow):
         # 5. Populate lại
         self.asset_tabler.populate(current_category)
 
-
+    def openExplore(self):
+        asset_folder = Config.Configuration.get_asset_library_path()
+        if asset_folder and os.path.exists(asset_folder):
+            os.startfile(asset_folder)
+        else:
+            QtWidgets.QMessageBox.warning(self, "Error", "Đường dẫn Asset Library không tồn tại!")
+            QtWidgets.QMessageBox.warning(self, "Attention", "Bạn phải set path trước !!! ")
 
 def openWindow():
     mayaMainWindow = getMayaMainWindow()

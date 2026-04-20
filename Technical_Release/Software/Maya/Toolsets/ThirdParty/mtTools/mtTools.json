@@ -1,14 +1,14 @@
 {
     "useGifTooltips": true,
-    "UVSnapshotResX": 5,
+    "UVSnapshotResX": 4,
     "UVSnapshotResY": 5,
-    "ExportPath": "C:/MT.fbx/",
+    "ExportPath": "C:/adad.fbx/",
     "useBakeGroups": true,
     "ExplodeStep": 100,
     "RadialInstanceCount": 6,
     "InstanceAroundOrigin": true,
-    "windowSizeX": 347,
-    "windowSizeY": 649,
+    "windowSizeX": 298,
+    "windowSizeY": 598,
     "bgColor": {
         "r": 119,
         "g": 208,
