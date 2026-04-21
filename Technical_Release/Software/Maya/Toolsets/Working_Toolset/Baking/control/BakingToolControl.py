@@ -6,7 +6,10 @@ created 12/6/2025
 import maya.cmds as cmds
 import os
 import sys
+import getpass
 from maya import OpenMayaUI as omui
+
+username = getpass.getuser()
 
 #------- PyQt/PySide imports ----------
 from Common.qt_compat import QtWidgets, QtCore, QtGui, QtUiTools, wrapInstance
@@ -27,7 +30,10 @@ importlib.reload(TransformFunction)
 import Libs.SortOutliner as SortOutliner
 importlib.reload(SortOutliner)
 
-# Import file UI đã được convert
+import Libs.NamingConvention as NamingConvention
+importlib.reload(NamingConvention)
+
+
 import Software.Maya.Toolsets.Working_Toolset.Baking.UI.BakeTool as BakeTool
 importlib.reload(BakeTool)
 import Software.Maya.Toolsets.Working_Toolset.Baking.model.Baking_MayaFuntion as Baking_MayaFuntion
@@ -81,11 +87,7 @@ class BakingToolControl(QtWidgets.QMainWindow):
         self.setObjectName("BakingToolControl_window")
         self.setWindowTitle("Baking Tool Control")
 
-        # Các phương thức createWidgets và createLayouts không cần thiết
-        # vì self.ui.setupUi(self) đã tạo tất cả widget và layout.
         self.createWidgets()
-        self.createLayouts()
-
 
         # Kết nối các tín hiệu (signal) từ widget tới các hàm (slot)
         self.createConnection()
@@ -106,12 +108,6 @@ class BakingToolControl(QtWidgets.QMainWindow):
         # QDoubleSpinBox
         self.ui.spinBoxDis.setValue(2)
 
-    def createLayouts(self):
-        """
-        Layout đã được thiết lập bởi self.ui.setupUi(self).
-        Phương thức này có thể dùng để tùy chỉnh thêm các Layouts nếu cần.
-        """
-        pass
 
     def createConnection(self):
         #Your code goes here
@@ -139,7 +135,7 @@ class BakingToolControl(QtWidgets.QMainWindow):
         self.ui.btnExportAll.clicked.connect(self.exportOneFBX)
 
         self.ui.btnExportExplore.clicked.connect(self.onBrowseFolder)
-        self.ui.btnExportSpecial.clicked.connect(self.ExportCustom)
+        self.ui.btnExportSpecial.clicked.connect(self.exportCustom)
 
         self.ui.btnFAQs_all.clicked.connect(self.createFAQs_all_btn)
         self.ui.btnFAQs_display.clicked.connect(self.createFAQs_display_btn)
@@ -160,9 +156,9 @@ class BakingToolControl(QtWidgets.QMainWindow):
 
     def createFAQs_export_btn(self):
         cmds.confirmDialog(title=" Hướng dẫn",
-                           message="Có 2 Option để Export"
-                                   "\nHoặc là explore tìm kiếm thư mục"
-                                   "\nHoặc là dán Path vào ô trống")
+                           message="Click chọn đường dẫn"
+                                   "\nNếu đường dẫn được hiển thị trên box là OK"
+                                   "\nNên đặt tên chính xác trước khi Export")
 
     def createBakeset_btn(self):
         Baking_MayaFuntion.createBakeset()
@@ -322,36 +318,32 @@ class BakingToolControl(QtWidgets.QMainWindow):
     # ---------Explore Browser---------------
     def onBrowseFolder(self):
         if not CommonHelpers.CheckValidScene():
-            return  # Thoát nếu scene chưa được lưu
-        folderPath = CommonHelpers.browseFolderPath()
-        print(folderPath)
-        if folderPath:
-            self.ui.textEditPath.setPlainText(folderPath)
-            return folderPath
-
-    #----------Nhận Path thủ công----------
-    def getFolderPath(self):
-        folderPath = self.ui.textEditPath.toPlainText().strip()    # strip() loại bỏ khoảng trắng
-        if folderPath and os.path.exists(folderPath):
-            return folderPath
-        else:
-            cmds.confirmDialog(title="Error",
-                               message="Đường dẫn không hợp lệ!,"
-                                       "\nLưu vào Save Scene Path",
-                               button=["Confirm Export"])
-            return False
-
-    # --------comfirmExport-------------
-    def onConfirmExport(self):
-        path = self.getFolderPath()
-        print(path)
-        if not path:
             return
 
-        # tiếp tục xử lý export tại folder `path`
+        folderPath = CommonHelpers.browseFolderPath()
+        if folderPath:
+            self.exportPath = folderPath  # lưu lại path
+            self.ui.textEditPath.setPlainText(folderPath)
 
-    def ExportCustom(self):
-        self.onConfirmExport()
+    def exportCustom(self):
+        finalPath = getattr(self, "exportPath", None)
+
+        if not finalPath:
+            cmds.warning("Chưa chọn đường dẫn export!")
+            return
+
+        if cmds.ls(sl=True):
+            meshName = NamingConvention.getSelMeshName()
+            name = f'{meshName}.fbx'
+            fbxPath = os.path.join(finalPath, name)
+            fbxPath = os.path.normpath(fbxPath).replace("\\", "/")
+
+            TeleportFBX.ExportFBXOption(fbxPath)
+        else:
+            cmds.warning("Chưa chọn object để export!")
+            cmds.confirmDialog(title="Error",
+                               message="Chưa chọn object để export!",
+                               button=["Confirm Export"])
 
 
 

@@ -61,9 +61,9 @@ class Ui_mainWindow(object):
         self.HF_author.setFont(font1)
         self.HF_author.setStyleSheet(u"color: rgb(128, 200, 255);\n"
 "font:9pt \"Bahnschrift SemiBold SemiConden\";")
-        self.btnFAQs_all = QPushButton(self.centralwidget)
-        self.btnFAQs_all.setObjectName(u"btnFAQs_all")
-        self.btnFAQs_all.setGeometry(QRect(380, 0, 25, 23))
+        self.btnFAQs_MaBlen = QPushButton(self.centralwidget)
+        self.btnFAQs_MaBlen.setObjectName(u"btnFAQs_MaBlen")
+        self.btnFAQs_MaBlen.setGeometry(QRect(380, 0, 25, 23))
         self.btnImptMaya = QPushButton(self.centralwidget)
         self.btnImptMaya.setObjectName(u"btnImptMaya")
         self.btnImptMaya.setGeometry(QRect(13, 40, 185, 64))
@@ -135,7 +135,7 @@ class Ui_mainWindow(object):
 "")
         self.btnExptOBJ = QPushButton(self.centralwidget)
         self.btnExptOBJ.setObjectName(u"btnExptOBJ")
-        self.btnExptOBJ.setGeometry(QRect(9, 204, 88, 44))
+        self.btnExptOBJ.setGeometry(QRect(120, 204, 88, 44))
         self.btnExptOBJ.setStyleSheet(u"QPushButton {\n"
 "font:12pt \"Bahnschrift SemiBold SemiConden\";\n"
 "color: rgb(34, 34, 34);\n"
@@ -191,9 +191,9 @@ class Ui_mainWindow(object):
 "border-radius: 8px;\n"
 "}\n"
 "")
-        self.btnFAQs_export = QPushButton(self.centralwidget)
-        self.btnFAQs_export.setObjectName(u"btnFAQs_export")
-        self.btnFAQs_export.setGeometry(QRect(377, 132, 25, 23))
+        self.btnFAQs_Advanced = QPushButton(self.centralwidget)
+        self.btnFAQs_Advanced.setObjectName(u"btnFAQs_Advanced")
+        self.btnFAQs_Advanced.setGeometry(QRect(377, 132, 25, 23))
         self.textEditPath = QTextEdit(self.centralwidget)
         self.textEditPath.setObjectName(u"textEditPath")
         self.textEditPath.setGeometry(QRect(50, 160, 220, 36))
@@ -233,7 +233,7 @@ class Ui_mainWindow(object):
         self.line_1.setFrameShadow(QFrame.Shadow.Sunken)
         self.btnExptUSD = QPushButton(self.centralwidget)
         self.btnExptUSD.setObjectName(u"btnExptUSD")
-        self.btnExptUSD.setGeometry(QRect(107, 204, 88, 44))
+        self.btnExptUSD.setGeometry(QRect(211, 204, 88, 44))
         self.btnExptUSD.setStyleSheet(u"QPushButton {\n"
 "font:12pt \"Bahnschrift SemiBold SemiConden\";\n"
 "color: rgb(34, 34, 34);\n"
@@ -319,7 +319,7 @@ class Ui_mainWindow(object):
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
         self.btnUnrealToMaya = QPushButton(self.centralwidget)
         self.btnUnrealToMaya.setObjectName(u"btnUnrealToMaya")
-        self.btnUnrealToMaya.setGeometry(QRect(25, 449, 119, 44))
+        self.btnUnrealToMaya.setGeometry(QRect(25, 450, 119, 44))
         self.btnUnrealToMaya.setStyleSheet(u"QPushButton {\n"
 "font:12pt \"Bahnschrift SemiBold SemiConden\";\n"
 "color: rgb(34, 34, 34);\n"
@@ -342,7 +342,7 @@ class Ui_mainWindow(object):
 "")
         self.btnExptUE = QPushButton(self.centralwidget)
         self.btnExptUE.setObjectName(u"btnExptUE")
-        self.btnExptUE.setGeometry(QRect(151, 449, 137, 44))
+        self.btnExptUE.setGeometry(QRect(149, 451, 137, 44))
         self.btnExptUE.setStyleSheet(u"QPushButton {\n"
 "font:12pt \"Bahnschrift SemiBold SemiConden\";\n"
 "color: rgb(34, 34, 34);\n"
@@ -363,12 +363,12 @@ class Ui_mainWindow(object):
 "border-radius: 8px;\n"
 "}\n"
 "")
-        self.btnFAQs_export_2 = QPushButton(self.centralwidget)
-        self.btnFAQs_export_2.setObjectName(u"btnFAQs_export_2")
-        self.btnFAQs_export_2.setGeometry(QRect(375, 423, 25, 23))
+        self.btnFAQs_Engine = QPushButton(self.centralwidget)
+        self.btnFAQs_Engine.setObjectName(u"btnFAQs_Engine")
+        self.btnFAQs_Engine.setGeometry(QRect(375, 423, 25, 23))
         self.btnExptUnity = QPushButton(self.centralwidget)
         self.btnExptUnity.setObjectName(u"btnExptUnity")
-        self.btnExptUnity.setGeometry(QRect(150, 503, 137, 44))
+        self.btnExptUnity.setGeometry(QRect(148, 500, 137, 44))
         self.btnExptUnity.setStyleSheet(u"QPushButton {\n"
 "font:12pt \"Bahnschrift SemiBold SemiConden\";\n"
 "color: rgb(34, 34, 34);\n"
@@ -442,8 +442,31 @@ class Ui_mainWindow(object):
 "")
         self.btnUnityToMaya = QPushButton(self.centralwidget)
         self.btnUnityToMaya.setObjectName(u"btnUnityToMaya")
-        self.btnUnityToMaya.setGeometry(QRect(25, 501, 119, 44))
+        self.btnUnityToMaya.setGeometry(QRect(25, 499, 119, 44))
         self.btnUnityToMaya.setStyleSheet(u"QPushButton {\n"
+"font:12pt \"Bahnschrift SemiBold SemiConden\";\n"
+"color: rgb(34, 34, 34);\n"
+"background-color: rgb(125, 125, 125);\n"
+"\n"
+"border: 1px solid rgb(24, 103, 155);\n"
+"border-radius: 8px;\n"
+" }\n"
+"QPushButton:hover{\n"
+"background-color:  rgb(125, 125, 125);\n"
+"border: 3px solid rgb(24, 103, 155);\n"
+"border-radius: 8px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"background-color:rgb(74, 74, 74);\n"
+"border: 3px solid rgb(24, 103, 155);\n"
+"border-radius: 8px;\n"
+"}\n"
+"")
+        self.btnExptFBX = QPushButton(self.centralwidget)
+        self.btnExptFBX.setObjectName(u"btnExptFBX")
+        self.btnExptFBX.setGeometry(QRect(10, 204, 107, 44))
+        self.btnExptFBX.setStyleSheet(u"QPushButton {\n"
 "font:12pt \"Bahnschrift SemiBold SemiConden\";\n"
 "color: rgb(34, 34, 34);\n"
 "background-color: rgb(125, 125, 125);\n"
@@ -480,14 +503,14 @@ class Ui_mainWindow(object):
     def retranslateUi(self, mainWindow):
         mainWindow.setWindowTitle(QCoreApplication.translate("mainWindow", u"MainWindow", None))
         self.HF_author.setText(QCoreApplication.translate("mainWindow", u"@HuangFei", None))
-        self.btnFAQs_all.setText(QCoreApplication.translate("mainWindow", u"?", None))
+        self.btnFAQs_MaBlen.setText(QCoreApplication.translate("mainWindow", u"?", None))
         self.btnImptMaya.setText(QCoreApplication.translate("mainWindow", u"Import to Maya", None))
         self.btnExptShare.setText(QCoreApplication.translate("mainWindow", u"Export SHARE", None))
         self.btnExportExplore.setText(QCoreApplication.translate("mainWindow", u"...", None))
         self.btnExptOBJ.setText(QCoreApplication.translate("mainWindow", u"OBJ", None))
         self.label_MayaBlender.setText(QCoreApplication.translate("mainWindow", u"MAYA ----- BLENDER", None))
         self.btnOpenExplore.setText(QCoreApplication.translate("mainWindow", u"Explore", None))
-        self.btnFAQs_export.setText(QCoreApplication.translate("mainWindow", u"?", None))
+        self.btnFAQs_Advanced.setText(QCoreApplication.translate("mainWindow", u"?", None))
         self.btExptBlender.setText(QCoreApplication.translate("mainWindow", u"Export to Blender", None))
         self.label_Advanced.setText(QCoreApplication.translate("mainWindow", u"ADVANCED", None))
         self.btnExptUSD.setText(QCoreApplication.translate("mainWindow", u"USD", None))
@@ -497,10 +520,11 @@ class Ui_mainWindow(object):
         self.label_TeleEngine.setText(QCoreApplication.translate("mainWindow", u"TELEPORT TO ENGINE", None))
         self.btnUnrealToMaya.setText(QCoreApplication.translate("mainWindow", u"Import to Maya", None))
         self.btnExptUE.setText(QCoreApplication.translate("mainWindow", u"Export to Unreal", None))
-        self.btnFAQs_export_2.setText(QCoreApplication.translate("mainWindow", u"?", None))
-        self.btnExptUnity.setText(QCoreApplication.translate("mainWindow", u"Export to UNITY", None))
+        self.btnFAQs_Engine.setText(QCoreApplication.translate("mainWindow", u"?", None))
+        self.btnExptUnity.setText(QCoreApplication.translate("mainWindow", u"Export to Unity", None))
         self.btnEnginePath.setText(QCoreApplication.translate("mainWindow", u"path", None))
         self.btnMaterialsTool.setText(QCoreApplication.translate("mainWindow", u"Mat", None))
         self.btnUnityToMaya.setText(QCoreApplication.translate("mainWindow", u"Import to Maya", None))
+        self.btnExptFBX.setText(QCoreApplication.translate("mainWindow", u"FBX", None))
     # retranslateUi
 

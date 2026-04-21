@@ -18,7 +18,8 @@ importlib.reload(CommonHelpers)
 
 #adminList = ['Phineas', 'trong', 'HuangFei']
 username = getpass.getuser()
-mainPath = 'C:/tempMaya/ExportFBX/'
+
+mainPath = 'C:/tempMaya/ExportFBX/Custom'
 pathSharing = 'C:/tempMaya/ExportFBX/Share/'
 
 blenderPath = 'C:/tempMaya/ExportFBX/Blender/'
@@ -71,15 +72,30 @@ def ExportFBXOption(filename, FBXversion='FBX202000', FBXASCII=True, unit='cm', 
 
     print(f"Export thành công: {filename}")
 
+def fix_duplicate_names():
+    all_nodes = cmds.ls(dag=True, long=True)
+    short_names = {}
 
-def exportFBX():
+    for node in all_nodes:
+        short = node.split("|")[-1]
+        if short in short_names:
+            new_name = cmds.rename(node, short + "_fix")
+            print("Renamed:", node, "->", new_name)
+        else:
+            short_names[short] = node
+
+
+def exportFBX(customPath = None):
     if cmds.ls(sl=True):
         name = f'{username}_Custom.fbx'
-        fbxPath = os.path.join(mainPath, name)
-        CommonPyFunction.Make_dir(mainPath)
+        if not customPath:
+            return  # stop nếu không có path
+        fbxPath = os.path.join(customPath, name)
+        CommonPyFunction.Make_dir(customPath)
         ExportFBXOption(fbxPath)
     else:
         cmds.warning("Chưa chọn object để export!")
+
 
 def exportToBlender():
     if cmds.ls(sl=True):
@@ -89,7 +105,9 @@ def exportToBlender():
         ExportFBXOption(fbxPath)
     else:
         cmds.warning("Chưa chọn object để export!")
-
+        cmds.confirmDialog(title="Error",
+                           message="Chưa chọn object để export!",
+                           button=["Confirm Export"])
 
 
 def exportFBXSharing():
@@ -100,7 +118,9 @@ def exportFBXSharing():
         ExportFBXOption(fbxPath)
     else:
         cmds.warning("Chưa chọn object để share!")
-
+        cmds.confirmDialog(title="Error",
+                           message="Chưa chọn object để share!",
+                           button=["Confirm Export"])
 
 def exportFBXFolderScene(suffix='', FBXversion='FBX202000', FBXASCII=True, unit='cm', folderExport='', selection=False,
                          name=''):
@@ -137,7 +157,9 @@ def importFBXOption(filename, unlockNormals=True):
     mel.eval(f'FBXImport -file "{filename}";')
 
     print("Import thành công !!!")
-
+    cmds.confirmDialog(title="Success",
+                       message="Import thành công !!!",
+                       button=["Confirm"])
 
 def blenderToMaya():
     name = f'{username}_Blender.fbx'
@@ -147,7 +169,9 @@ def blenderToMaya():
         importFBXOption(fbxPath)
     else:
         cmds.warning(" Không có file nào để import !!!")
-
+        cmds.confirmDialog(title="Warning",
+                           message="Không có file nào để import !!!",
+                           button=["Confirm"])
 
 def unrealToMaya():
     name = f'{username}_Unreal.fbx'
@@ -157,6 +181,10 @@ def unrealToMaya():
         importFBXOption(fbxPath)
     else:
         cmds.warning(" Không có file nào để import !!!")
+        cmds.confirmDialog(title="Warning",
+                           message="Không có file nào để import !!!",
+                           button=["Confirm"])
+
 
 def unityToMaya():
     name = f'{username}_Unity.fbx'
@@ -166,6 +194,9 @@ def unityToMaya():
         importFBXOption(fbxPath)
     else:
         cmds.warning(" Không có file nào để import !!!")
+        cmds.confirmDialog(title="Warning",
+                           message="Không có file nào để import !!!",
+                           button=["Confirm"])
 
 
 def clean_gs_junk():
@@ -203,4 +234,3 @@ def clean_gs_junk():
                 cmds.makeIdentity(node, apply=True, t=True, r=True, s=True, n=False)
         except:
             pass
-

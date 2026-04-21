@@ -5,6 +5,9 @@
 import maya.cmds as cmds
 import maya.mel as mel
 import os
+import subprocess
+import sys
+
 
 ####################
 #   # ------------------------- HÀM CHÍNH -------------------------
@@ -48,7 +51,9 @@ def CheckValidScene(showDialog=True):
     scene = cmds.file(query=True, sceneName=True, shortName=True)
     if not scene:
         if showDialog:
-            cmds.confirmDialog(title="Warning", message="Bạn chưa lưu file!", button=["Confirm"])
+            cmds.confirmDialog(title="Warning",
+                               message="Bạn chưa lưu file!",
+                               button=["Confirm"])
         return False
     return True
 
@@ -78,3 +83,59 @@ def browseFolderPath():
     else:
         return ''
 
+# ---------open Explore---------------
+def openExplore():
+    if not CheckValidScene():
+        return  # Thoát nếu scene chưa được lưu
+    folderPath = browseFolderPath()
+    print(folderPath)
+    if folderPath:
+        os.startfile(folderPath)  # Mở thư mục trong File Explorer
+        return folderPath
+
+#----------Nhận Path thủ công----------
+def getFolderPath(path_text):
+    folderPath = path_text.strip()    # strip() loại bỏ khoảng trắng
+    if folderPath and os.path.exists(folderPath):
+        return folderPath
+    else:
+        cmds.confirmDialog(title="Error",
+                           message="Đường dẫn không hợp lệ!,"
+                                   "\nLưu vào Save Scene Path",
+                           button=["Confirm Export"])
+        return False
+
+
+# ---------folder Explore---------------
+def folderExploreBrowser(path):
+    """
+    Mở folder cuối cùng của một đường dẫn trong Explorer (Windows) / Finder (Mac)
+
+    Args:
+        path (str): đường dẫn file hoặc folder
+    """
+
+    if not path:
+        return
+
+    # Normalize path
+    path = os.path.normpath(path)
+
+    # Nếu là file → lấy folder chứa nó
+    if os.path.isfile(path):
+        path = os.path.dirname(path)
+
+    # Nếu không tồn tại → thoát
+    if not os.path.exists(path):
+        print("Path không tồn tại:", path)
+        return
+
+    try:
+        if sys.platform == "win32":
+            subprocess.Popen(f'explorer "{path}"')
+        elif sys.platform == "darwin":
+            subprocess.Popen(["open", path])
+        else:
+            subprocess.Popen(["xdg-open", path])
+    except Exception as e:
+        print("Không mở được folder:", e)

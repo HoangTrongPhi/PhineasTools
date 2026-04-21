@@ -7,18 +7,13 @@ import os
 
 def Make_dir(path):
     """
-        input a path to check if it exists, if not, it creates all the path
-        :return: path string
+    Tạo thư mục tại đường dẫn được chỉ định nếu nó chưa tồn tại.
     """
-    if not os.path.exists(path):
-        os.makedirs(path)
-    return path
-
+    os.makedirs(path, exist_ok=True)
 
 def Get_WD(path):
     """
-    Tách tên file và đường dẫn cha của một file.
-    Trả về [tên file (kèm extension), thư mục chứa file]
+    Lấy tên file và đường dẫn thư mục chứa file từ đường dẫn đầy đủ của file.
     """
     currPath = os.path.dirname(path)  # Lấy đường dẫn thư mục chứa file
     currName = os.path.basename(path)  # Lấy tên file kèm extension
@@ -27,35 +22,34 @@ def Get_WD(path):
 
 def Get_FileName(filePath):
     """
-    Lấy tên file KHÔNG kèm phần mở rộng từ đường dẫn file đầu vào.
-
-    Ví dụ:
-        filePath = C:/folder/data/myfileFBX.txt
-        → return myfileFBX
+    Trả về tên file không có phần mở rộng từ một filePath bất kỳ.
+     VD: C:/tempMaya/ExportFBX/Custom/myModel.fbx --> trả về 'myModel'
+     Sử dụng os.path.splitext để tách phần mở rộng và os.path.basename để lấy tên file.
+     Nếu filePath không hợp lệ hoặc không có tên file, sẽ trả về None.
     """
-    currWD = Get_WD(filePath)  # Lấy danh sách [tên file, thư mục]
-    nameFileExt = os.path.basename(currWD[0])  # currWD[0] là tên file kèm extension
-    nameFile = os.path.splitext(nameFileExt)[0]  # Tách phần tên khỏi phần extension
-    return nameFile  # Trả lại tên file không có phần mở rộng
+    return os.path.splitext(os.path.basename(filePath))[0]
 
 
-# Trả về tên file kèm phần mở rộng từ một filePath bất kỳ
-# Nhận filePath làm đối số → dùng được cho nhiều file khác nhau, tổng quát hơn.
-# Trả về cả tên file và phần mở rộng, không tách riêng.
 def Get_FileNameExt(filePath):
-    """Get File Name with extension from File Path"""
-    currWD = Get_WD(filePath)
-    nameFileExt = os.path.basename(currWD[0])
-    return nameFileExt
+    """ Trả về tên file có phần mở rộng từ một filePath bất kỳ."""
+    return os.path.basename(filePath)
 
 
-def find_files_with_extension(root_folder, extension):
+def find_files_with_extension(root_folder, extensions):
     """
     Duyệt toàn bộ thư mục con, trả về list path các file có đuôi extension (.fbx/.obj)
     """
+    if isinstance(extensions, str):
+        extensions = [extensions]
+
+    extensions = [ext.lower() for ext in extensions]
+
     results = []
     for dirpath, _, filenames in os.walk(root_folder):
         for filename in filenames:
-            if filename.lower().endswith(extension.lower()):
+            if any(filename.lower().endswith(ext) for ext in extensions):
                 results.append(os.path.join(dirpath, filename))
     return results
+
+
+

@@ -14,7 +14,12 @@
 """
 import os
 import shutil
-import time
+import subprocess
+import sys
+import json
+
+
+
 #------- PyQt/PySide imports ----------
 from Common.qt_compat import QtWidgets, QtCore, QtGui, QtUiTools, wrapInstance
 QTreeView = QtWidgets.QTreeView
@@ -83,8 +88,11 @@ class FolderTreeView(QTreeView):
         global_pos = self.viewport().mapToGlobal(point)
         menu = QMenu()
         create_action = menu.addAction("Create Folder")
+        open_action = None
         rename_action = delete_action = None
+
         if is_folder:
+            open_action = menu.addAction("Open Folder")
             rename_action = menu.addAction("Rename Folder")
             delete_action = menu.addAction("Delete Folder")
         # DÙNG exec_() cho tương thích cả PySide2 lẫn PySide6 (rất quan trọng)
@@ -92,8 +100,13 @@ class FolderTreeView(QTreeView):
         if selected_action == create_action:
             parent_path = self.model.filePath(index) if is_folder else self.model.rootPath()
             self.create_folder_dialog(parent_path)
+
+        elif open_action and selected_action == open_action:
+            self.open_folder(index)
+
         elif rename_action and selected_action == rename_action:
             self.rename_folder(index)
+
         elif delete_action and selected_action == delete_action:
             self.delete_folder(self.model.filePath(index))
 
@@ -198,3 +211,37 @@ class FolderTreeView(QTreeView):
                 QMessageBox.warning(self, "Error", str(e))
         parent_dir = os.path.dirname(folder_path)
         self.reset_filesystem_model(parent_dir)
+
+    def open_folder(self, index=None):
+        path = None
+
+        # Ưu tiên folder đang select
+        if index and index.isValid():
+            path = self.model.filePath(index)
+
+        # Nếu không có → fallback JSON
+        if not path:
+            json_path = os.path.join(os.path.dirname(__file__), "tree_folder.json")
+
+            if os.path.exists(json_path):
+                with open(json_path, "r") as f:
+                    data = json.load(f)
+                    folder_list = data.get("tree_folder_list", [])
+                    if folder_list:
+                        path = folder_list[0]
+
+        if not path or not os.path.exists(path):
+            QMessageBox.warning(self, "Error", "Path không hợp lệ.")
+            return
+
+        path = os.path.normpath(path)
+
+        try:
+            if sys.platform == "win32":
+                subprocess.Popen(f'explorer "{path}"')
+            elif sys.platform == "darwin":
+                subprocess.Popen(["open", path])
+            else:
+                subprocess.Popen(["xdg-open", path])
+        except Exception as e:
+            QMessageBox.warning(self, "Error", f"Không mở được folder:\n{str(e)}")

@@ -48,7 +48,7 @@ font:9pt &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
      <string>@HuangFei</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnFAQs_all">
+   <widget class="QPushButton" name="btnFAQs_MaBlen">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -169,7 +169,7 @@ border-radius: 8px;
    <widget class="QPushButton" name="btnExptOBJ">
     <property name="geometry">
      <rect>
-      <x>9</x>
+      <x>120</x>
       <y>204</y>
       <width>88</width>
       <height>44</height>
@@ -262,7 +262,7 @@ border-radius: 8px;
      <string>Explore</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnFAQs_export">
+   <widget class="QPushButton" name="btnFAQs_Advanced">
     <property name="geometry">
      <rect>
       <x>377</x>
@@ -362,7 +362,7 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
    <widget class="QPushButton" name="btnExptUSD">
     <property name="geometry">
      <rect>
-      <x>107</x>
+      <x>211</x>
       <y>204</y>
       <width>88</width>
       <height>44</height>
@@ -533,7 +533,7 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
     <property name="geometry">
      <rect>
       <x>25</x>
-      <y>449</y>
+      <y>450</y>
       <width>119</width>
       <height>44</height>
      </rect>
@@ -567,8 +567,8 @@ border-radius: 8px;
    <widget class="QPushButton" name="btnExptUE">
     <property name="geometry">
      <rect>
-      <x>151</x>
-      <y>449</y>
+      <x>149</x>
+      <y>451</y>
       <width>137</width>
       <height>44</height>
      </rect>
@@ -599,7 +599,7 @@ border-radius: 8px;
      <string>Export to Unreal</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnFAQs_export_2">
+   <widget class="QPushButton" name="btnFAQs_Engine">
     <property name="geometry">
      <rect>
       <x>375</x>
@@ -615,8 +615,8 @@ border-radius: 8px;
    <widget class="QPushButton" name="btnExptUnity">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>503</y>
+      <x>148</x>
+      <y>500</y>
       <width>137</width>
       <height>44</height>
      </rect>
@@ -644,7 +644,7 @@ border-radius: 8px;
 </string>
     </property>
     <property name="text">
-     <string>Export to UNITY</string>
+     <string>Export to Unity</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnEnginePath">
@@ -734,7 +734,7 @@ border-radius: 8px;
     <property name="geometry">
      <rect>
       <x>25</x>
-      <y>501</y>
+      <y>499</y>
       <width>119</width>
       <height>44</height>
      </rect>
@@ -763,6 +763,41 @@ border-radius: 8px;
     </property>
     <property name="text">
      <string>Import to Maya</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnExptFBX">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>204</y>
+      <width>107</width>
+      <height>44</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 8px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>FBX</string>
     </property>
    </widget>
   </widget>
