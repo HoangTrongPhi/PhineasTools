@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainWindow</class>
+ <widget class="QMainWindow" name="mainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>892</width>
+    <height>709</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(34, 34, 34);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="RG_author">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>640</y>
+      <width>66</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>9</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:9pt &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>@HuangFei</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Display">
+    <property name="geometry">
+     <rect>
+      <x>763</x>
+      <y>339</y>
+      <width>102</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>DISPLAY TOGGLE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnFAQs_all">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>-2</y>
+      <width>25</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>?</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnBakeSet">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>422</y>
+      <width>220</width>
+      <height>64</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 8px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 8px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 8px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Create BakeSet</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnDisHigh">
+    <property name="geometry">
+     <rect>
+      <x>654</x>
+      <y>527</y>
+      <width>80</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 4px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 4px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 4px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>High</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>202</x>
+      <y>605</y>
+      <width>460</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnDisLow">
+    <property name="geometry">
+     <rect>
+      <x>743</x>
+      <y>511</y>
+      <width>80</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+font:12pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+color: rgb(34, 34, 34);
+background-color: rgb(125, 125, 125);
+
+border: 1px solid rgb(24, 103, 155);
+border-radius: 4px;
+ }
+QPushButton:hover{
+background-color:  rgb(125, 125, 125);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 4px;
+}
+
+QPushButton:pressed{
+background-color:rgb(74, 74, 74);
+border: 3px solid rgb(24, 103, 155);
+border-radius: 4px;;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Low</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Selection">
+    <property name="geometry">
+     <rect>
+      <x>671</x>
+      <y>343</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>SELECTION</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_SetCreate">
+    <property name="geometry">
+     <rect>
+      <x>526</x>
+      <y>273</y>
+      <width>133</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>SETUP &amp; CREATE</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Warning_2">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>293</y>
+      <width>327</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Bahnschrift SemiBold SemiConden</family>
+      <pointsize>10</pointsize>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 180, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Bung từng cặp Mesh Low/High tránh bake bị lem map</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEditPath">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>375</y>
+      <width>390</width>
+      <height>194</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>126</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_SetCreate_2">
+       <property name="font">
+        <font>
+         <family>Bahnschrift SemiBold SemiConden</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>false</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Geometry</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_8">
+       <property name="text">
+        <string>Mesh Instance</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_7">
+       <property name="text">
+        <string>Concave Faces</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_9">
+       <property name="text">
+        <string>Zero Edge Length</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_12">
+       <property name="text">
+        <string>Non-manifold</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_13">
+       <property name="text">
+        <string>Lamina faces</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>148</y>
+      <width>157</width>
+      <height>98</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_SetCreate_3">
+       <property name="font">
+        <font>
+         <family>Bahnschrift SemiBold SemiConden</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>false</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+       </property>
+       <property name="text">
+        <string>UV</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_10">
+       <property name="text">
+        <string>More than 1 UV Channel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_11">
+       <property name="text">
+        <string>Missing UV</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_14">
+       <property name="text">
+        <string>Overlapping UV</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>250</y>
+      <width>157</width>
+      <height>94</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_SetCreate_4">
+       <property name="font">
+        <font>
+         <family>Bahnschrift SemiBold SemiConden</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>false</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Texture / Material</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_15">
+       <property name="text">
+        <string>Missing Textures</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_18">
+       <property name="text">
+        <string>Invalid Texture Path</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_16">
+       <property name="text">
+        <string>Unused Materials</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>348</y>
+      <width>175</width>
+      <height>122</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_SetCreate_5">
+       <property name="font">
+        <font>
+         <family>Bahnschrift SemiBold SemiConden</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>false</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Scene </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_17">
+       <property name="text">
+        <string>Empty Transform</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_21">
+       <property name="text">
+        <string>Hidden Objects (optional)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_19">
+       <property name="text">
+        <string>Frozen Transform (optional)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_20">
+       <property name="text">
+        <string>History not Deleted</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>471</y>
+      <width>175</width>
+      <height>96</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <item>
+      <widget class="QLabel" name="label_SetCreate_6">
+       <property name="font">
+        <font>
+         <family>Bahnschrift SemiBold SemiConden</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>false</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Naming QC</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_22">
+       <property name="text">
+        <string>Default name</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_23">
+       <property name="text">
+        <string>Duplicate names</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_24">
+       <property name="text">
+        <string>Naming convention</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>252</x>
+      <y>1</y>
+      <width>145</width>
+      <height>148</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_7">
+     <item>
+      <widget class="QLabel" name="label_SetCreate_7">
+       <property name="font">
+        <font>
+         <family>Bahnschrift SemiBold SemiConden</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+         <kerning>false</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(128, 200, 255);
+font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Engine Game Ready</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_25">
+       <property name="text">
+        <string>Pivot centered</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_26">
+       <property name="text">
+        <string>Scale 1,1,1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_27">
+       <property name="text">
+        <string>Rotation zero</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_28">
+       <property name="text">
+        <string>Tris-count over</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_29">
+       <property name="text">
+        <string>Ngon group hierarchy</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <zorder>RG_author</zorder>
+   <zorder>label_Display</zorder>
+   <zorder>btnFAQs_all</zorder>
+   <zorder>btnBakeSet</zorder>
+   <zorder>line</zorder>
+   <zorder>btnDisLow</zorder>
+   <zorder>label_Selection</zorder>
+   <zorder>label_SetCreate</zorder>
+   <zorder>btnDisHigh</zorder>
+   <zorder>label_Warning_2</zorder>
+   <zorder>textEditPath</zorder>
+   <zorder>verticalLayoutWidget</zorder>
+   <zorder>verticalLayoutWidget_2</zorder>
+   <zorder>verticalLayoutWidget_3</zorder>
+   <zorder>verticalLayoutWidget_4</zorder>
+   <zorder>verticalLayoutWidget_5</zorder>
+   <zorder>verticalLayoutWidget_6</zorder>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>892</width>
+     <height>33</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>10</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>10</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>false</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>false</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>
