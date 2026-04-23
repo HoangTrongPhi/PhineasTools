@@ -64,8 +64,8 @@ font:9pt &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
    <widget class="QPushButton" name="btnRefreshTool">
     <property name="geometry">
      <rect>
-      <x>800</x>
-      <y>317</y>
+      <x>802</x>
+      <y>284</y>
       <width>194</width>
       <height>35</height>
      </rect>
@@ -138,8 +138,8 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
    <widget class="QLabel" name="lbl_AnotherTools">
     <property name="geometry">
      <rect>
-      <x>378</x>
-      <y>333</y>
+      <x>750</x>
+      <y>361</y>
       <width>133</width>
       <height>20</height>
      </rect>
@@ -190,10 +190,10 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
    <widget class="QTextEdit" name="txEd_Console">
     <property name="geometry">
      <rect>
-      <x>634</x>
+      <x>635</x>
       <y>30</y>
-      <width>364</width>
-      <height>278</height>
+      <width>363</width>
+      <height>248</height>
      </rect>
     </property>
    </widget>
@@ -471,6 +471,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -499,6 +505,12 @@ QPushButton:pressed{
          </property>
          <property name="text">
           <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -529,6 +541,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -557,6 +575,12 @@ QPushButton:pressed{
          </property>
          <property name="text">
           <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -622,7 +646,7 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
       <x>10</x>
       <y>147</y>
       <width>320</width>
-      <height>76</height>
+      <height>154</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_uv" stretch="1,0,0">
@@ -646,6 +670,27 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
         <widget class="QCheckBox" name="chbx_OverlapUV">
          <property name="text">
           <string>Overlapping UV</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="chbx_InvertedUV">
+         <property name="text">
+          <string>UV Inverted</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="chbx_UVOutRange">
+         <property name="text">
+          <string>UV Out Range</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="chbx_UVSetName">
+         <property name="text">
+          <string>UV Set Name</string>
          </property>
         </widget>
        </item>
@@ -800,6 +845,153 @@ QFrame[status=&quot;error&quot;] {
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QFrame" name="fr_InvertedUV">
+         <property name="minimumSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <stylestrategy>PreferDefault</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+    background-color: rgb(80, 80, 80);
+    border: 3px solid rgb(30, 30, 30); 
+    border-radius: 10px;                
+}
+
+QFrame[status=&quot;ok&quot;] {
+    background-color: rgb(0, 200, 0);
+    border: 3px solid rgb(0, 120, 0);
+}
+
+QFrame[status=&quot;warning&quot;] {
+    background-color: rgb(255, 180, 0);
+    border: 3px solid rgb(180, 120, 0);
+}
+
+QFrame[status=&quot;error&quot;] {
+    background-color: rgb(220, 50, 50);
+    border: 3px solid rgb(140, 20, 20);
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="fr_UVOutRange">
+         <property name="minimumSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <stylestrategy>PreferDefault</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+    background-color: rgb(80, 80, 80);
+    border: 3px solid rgb(30, 30, 30); 
+    border-radius: 10px;                
+}
+
+QFrame[status=&quot;ok&quot;] {
+    background-color: rgb(0, 200, 0);
+    border: 3px solid rgb(0, 120, 0);
+}
+
+QFrame[status=&quot;warning&quot;] {
+    background-color: rgb(255, 180, 0);
+    border: 3px solid rgb(180, 120, 0);
+}
+
+QFrame[status=&quot;error&quot;] {
+    background-color: rgb(220, 50, 50);
+    border: 3px solid rgb(140, 20, 20);
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="fr_UVSetName">
+         <property name="minimumSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <stylestrategy>PreferDefault</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+    background-color: rgb(80, 80, 80);
+    border: 3px solid rgb(30, 30, 30); 
+    border-radius: 10px;                
+}
+
+QFrame[status=&quot;ok&quot;] {
+    background-color: rgb(0, 200, 0);
+    border: 3px solid rgb(0, 120, 0);
+}
+
+QFrame[status=&quot;warning&quot;] {
+    background-color: rgb(255, 180, 0);
+    border: 3px solid rgb(180, 120, 0);
+}
+
+QFrame[status=&quot;error&quot;] {
+    background-color: rgb(220, 50, 50);
+    border: 3px solid rgb(140, 20, 20);
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -831,6 +1023,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -859,6 +1057,12 @@ QPushButton:pressed{
          </property>
          <property name="text">
           <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -889,6 +1093,117 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCh_InvertedUV">
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+    color: rgb(255, 255, 255);
+    background-color: rgb(40, 40, 40);
+
+    border: 1px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}
+
+QPushButton:hover{
+    background-color: rgb(50, 50, 50);
+    border: 3px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}
+
+QPushButton:pressed{
+    background-color: rgb(25, 25, 25);
+    border: 3px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCh_UVOutRange">
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+    color: rgb(255, 255, 255);
+    background-color: rgb(40, 40, 40);
+
+    border: 1px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}
+
+QPushButton:hover{
+    background-color: rgb(50, 50, 50);
+    border: 3px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}
+
+QPushButton:pressed{
+    background-color: rgb(25, 25, 25);
+    border: 3px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCh_UVSetName">
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+    color: rgb(255, 255, 255);
+    background-color: rgb(40, 40, 40);
+
+    border: 1px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}
+
+QPushButton:hover{
+    background-color: rgb(50, 50, 50);
+    border: 3px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}
+
+QPushButton:pressed{
+    background-color: rgb(25, 25, 25);
+    border: 3px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
       </layout>
@@ -899,7 +1214,7 @@ QPushButton:pressed{
     <property name="geometry">
      <rect>
       <x>13</x>
-      <y>232</y>
+      <y>334</y>
       <width>155</width>
       <height>16</height>
      </rect>
@@ -924,10 +1239,10 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
    <widget class="QWidget" name="horizontalLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>249</y>
+      <x>11</x>
+      <y>352</y>
       <width>319</width>
-      <height>80</height>
+      <height>102</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_tex" stretch="1,0,0">
@@ -951,6 +1266,13 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
         <widget class="QCheckBox" name="chbx_UnusedMaterials">
          <property name="text">
           <string>Unused Materials</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="chbx_ColorSet">
+         <property name="text">
+          <string>ColorSet</string>
          </property>
         </widget>
        </item>
@@ -1105,6 +1427,55 @@ QFrame[status=&quot;error&quot;] {
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QFrame" name="fr_ColorSet">
+         <property name="minimumSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <stylestrategy>PreferDefault</stylestrategy>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QFrame {
+    background-color: rgb(80, 80, 80);
+    border: 3px solid rgb(30, 30, 30); 
+    border-radius: 10px;                
+}
+
+QFrame[status=&quot;ok&quot;] {
+    background-color: rgb(0, 200, 0);
+    border: 3px solid rgb(0, 120, 0);
+}
+
+QFrame[status=&quot;warning&quot;] {
+    background-color: rgb(255, 180, 0);
+    border: 3px solid rgb(180, 120, 0);
+}
+
+QFrame[status=&quot;error&quot;] {
+    background-color: rgb(220, 50, 50);
+    border: 3px solid rgb(140, 20, 20);
+}</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::NoFrame</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -1136,6 +1507,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -1164,6 +1541,12 @@ QPushButton:pressed{
          </property>
          <property name="text">
           <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -1194,6 +1577,47 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCh_ColorSet">
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    font:10pt &quot;Bahnschrift SemiBold SemiConden&quot;;
+    color: rgb(255, 255, 255);
+    background-color: rgb(40, 40, 40);
+
+    border: 1px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}
+
+QPushButton:hover{
+    background-color: rgb(50, 50, 50);
+    border: 3px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}
+
+QPushButton:pressed{
+    background-color: rgb(25, 25, 25);
+    border: 3px solid rgb(24, 103, 155);
+    border-radius: 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
       </layout>
@@ -1203,10 +1627,10 @@ QPushButton:pressed{
    <widget class="QWidget" name="horizontalLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>472</y>
-      <width>320</width>
-      <height>102</height>
+      <x>369</x>
+      <y>28</y>
+      <width>261</width>
+      <height>103</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_scene" stretch="1,0,0">
@@ -1471,6 +1895,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -1499,6 +1929,12 @@ QPushButton:pressed{
          </property>
          <property name="text">
           <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -1529,6 +1965,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -1558,6 +2000,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
       </layout>
@@ -1567,8 +2015,8 @@ QPushButton:pressed{
    <widget class="QLabel" name="lbl_Scene">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>451</y>
+      <x>374</x>
+      <y>8</y>
       <width>173</width>
       <height>20</height>
      </rect>
@@ -1594,7 +2042,7 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>359</y>
+      <y>480</y>
       <width>319</width>
       <height>80</height>
      </rect>
@@ -1805,6 +2253,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -1873,7 +2327,7 @@ QPushButton:pressed{
     <property name="geometry">
      <rect>
       <x>11</x>
-      <y>340</y>
+      <y>458</y>
       <width>173</width>
       <height>20</height>
      </rect>
@@ -1911,9 +2365,9 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
    <widget class="QWidget" name="horizontalLayoutWidget_6">
     <property name="geometry">
      <rect>
-      <x>386</x>
-      <y>33</y>
-      <width>242</width>
+      <x>370</x>
+      <y>149</y>
+      <width>259</width>
       <height>128</height>
      </rect>
     </property>
@@ -2235,6 +2689,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -2263,6 +2723,12 @@ QPushButton:pressed{
          </property>
          <property name="text">
           <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -2293,6 +2759,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -2321,6 +2793,12 @@ QPushButton:pressed{
          </property>
          <property name="text">
           <string>Check</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -2351,6 +2829,12 @@ QPushButton:pressed{
          <property name="text">
           <string>Check</string>
          </property>
+         <property name="iconSize">
+          <size>
+           <width>18</width>
+           <height>18</height>
+          </size>
+         </property>
         </widget>
        </item>
       </layout>
@@ -2360,8 +2844,8 @@ QPushButton:pressed{
    <widget class="QLabel" name="lbl_Engine">
     <property name="geometry">
      <rect>
-      <x>389</x>
-      <y>10</y>
+      <x>374</x>
+      <y>130</y>
       <width>143</width>
       <height>16</height>
      </rect>
@@ -2386,8 +2870,8 @@ font:10pt  &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
    <widget class="QWidget" name="horizontalLayoutWidget_7">
     <property name="geometry">
      <rect>
-      <x>376</x>
-      <y>356</y>
+      <x>750</x>
+      <y>387</y>
       <width>247</width>
       <height>225</height>
      </rect>
@@ -2641,8 +3125,8 @@ QPushButton:pressed{
    <widget class="QPushButton" name="btnCheckAll">
     <property name="geometry">
      <rect>
-      <x>385</x>
-      <y>172</y>
+      <x>371</x>
+      <y>334</y>
       <width>69</width>
       <height>35</height>
      </rect>
@@ -2676,8 +3160,8 @@ QPushButton:pressed{
    <widget class="QPushButton" name="btnRun">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>172</y>
+      <x>446</x>
+      <y>334</y>
       <width>169</width>
       <height>35</height>
      </rect>
@@ -2711,9 +3195,9 @@ QPushButton:pressed{
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
-      <x>389</x>
-      <y>218</y>
-      <width>239</width>
+      <x>372</x>
+      <y>380</y>
+      <width>242</width>
       <height>32</height>
      </rect>
     </property>

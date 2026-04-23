@@ -11,6 +11,9 @@ check = 1
 fixAble = 1
 
 def run(nodes, selectionMesh):
+    """
+    Check khoảng trống trong namespace
+    """
     print(f'Running {__name__}')
     namespaces = []
     for node in nodes:

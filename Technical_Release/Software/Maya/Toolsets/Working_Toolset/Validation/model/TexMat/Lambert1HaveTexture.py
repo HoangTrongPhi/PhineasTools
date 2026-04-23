@@ -3,6 +3,8 @@
     Author: HOANG TRONG PHI (Optimized)
     22/4/2026
     Maya 2026+ (Python 3)
+
+    Notes: Check Lambert1 có texture
 """
 
 import maya.cmds as cmds

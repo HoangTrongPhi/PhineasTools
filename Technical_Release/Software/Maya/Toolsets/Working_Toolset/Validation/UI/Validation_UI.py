@@ -103,7 +103,7 @@ class Ui_mainWindow(object):
         self.btnFAQs.setGeometry(QRect(966, 1, 25, 23))
         self.btnRefreshTool = QPushButton(self.centralwidget)
         self.btnRefreshTool.setObjectName(u"btnRefreshTool")
-        self.btnRefreshTool.setGeometry(QRect(800, 317, 194, 35))
+        self.btnRefreshTool.setGeometry(QRect(802, 284, 194, 35))
         self.btnRefreshTool.setStyleSheet(u"QPushButton {\n"
 "    font:10pt \"Bahnschrift SemiBold SemiConden\";\n"
 "    color: rgb(255, 255, 255);\n"
@@ -143,7 +143,7 @@ class Ui_mainWindow(object):
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
         self.lbl_AnotherTools = QLabel(self.centralwidget)
         self.lbl_AnotherTools.setObjectName(u"lbl_AnotherTools")
-        self.lbl_AnotherTools.setGeometry(QRect(378, 333, 133, 20))
+        self.lbl_AnotherTools.setGeometry(QRect(750, 361, 133, 20))
         self.lbl_AnotherTools.setFont(font2)
         self.lbl_AnotherTools.setStyleSheet(u"color: rgb(128, 200, 255);\n"
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
@@ -155,7 +155,7 @@ class Ui_mainWindow(object):
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
         self.txEd_Console = QTextEdit(self.centralwidget)
         self.txEd_Console.setObjectName(u"txEd_Console")
-        self.txEd_Console.setGeometry(QRect(634, 30, 364, 278))
+        self.txEd_Console.setGeometry(QRect(635, 30, 363, 248))
         self.horizontalLayoutWidget = QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
         self.horizontalLayoutWidget.setGeometry(QRect(10, 29, 321, 97))
@@ -339,6 +339,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_ConcaveFaces.setIconSize(QSize(18, 18))
 
         self.verticalLayout_geo_03.addWidget(self.btnCh_ConcaveFaces)
 
@@ -364,6 +365,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_LaminaFaces.setIconSize(QSize(18, 18))
 
         self.verticalLayout_geo_03.addWidget(self.btnCh_LaminaFaces)
 
@@ -389,6 +391,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_NonManifold.setIconSize(QSize(18, 18))
 
         self.verticalLayout_geo_03.addWidget(self.btnCh_NonManifold)
 
@@ -414,6 +417,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_ZeroEdge.setIconSize(QSize(18, 18))
 
         self.verticalLayout_geo_03.addWidget(self.btnCh_ZeroEdge)
 
@@ -435,7 +439,7 @@ class Ui_mainWindow(object):
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
         self.horizontalLayoutWidget_2 = QWidget(self.centralwidget)
         self.horizontalLayoutWidget_2.setObjectName(u"horizontalLayoutWidget_2")
-        self.horizontalLayoutWidget_2.setGeometry(QRect(10, 147, 320, 76))
+        self.horizontalLayoutWidget_2.setGeometry(QRect(10, 147, 320, 154))
         self.horizontalLayout_uv = QHBoxLayout(self.horizontalLayoutWidget_2)
         self.horizontalLayout_uv.setObjectName(u"horizontalLayout_uv")
         self.horizontalLayout_uv.setContentsMargins(0, 0, 0, 0)
@@ -455,6 +459,21 @@ class Ui_mainWindow(object):
         self.chbx_OverlapUV.setObjectName(u"chbx_OverlapUV")
 
         self.verticalLayout_uv_01.addWidget(self.chbx_OverlapUV)
+
+        self.chbx_InvertedUV = QCheckBox(self.horizontalLayoutWidget_2)
+        self.chbx_InvertedUV.setObjectName(u"chbx_InvertedUV")
+
+        self.verticalLayout_uv_01.addWidget(self.chbx_InvertedUV)
+
+        self.chbx_UVOutRange = QCheckBox(self.horizontalLayoutWidget_2)
+        self.chbx_UVOutRange.setObjectName(u"chbx_UVOutRange")
+
+        self.verticalLayout_uv_01.addWidget(self.chbx_UVOutRange)
+
+        self.chbx_UVSetName = QCheckBox(self.horizontalLayoutWidget_2)
+        self.chbx_UVSetName.setObjectName(u"chbx_UVSetName")
+
+        self.verticalLayout_uv_01.addWidget(self.chbx_UVSetName)
 
 
         self.horizontalLayout_uv.addLayout(self.verticalLayout_uv_01)
@@ -551,6 +570,96 @@ class Ui_mainWindow(object):
 
         self.verticalLayout_uv_02.addWidget(self.fr_OverlapUV)
 
+        self.fr_InvertedUV = QFrame(self.horizontalLayoutWidget_2)
+        self.fr_InvertedUV.setObjectName(u"fr_InvertedUV")
+        self.fr_InvertedUV.setMinimumSize(QSize(18, 18))
+        self.fr_InvertedUV.setMaximumSize(QSize(18, 18))
+        self.fr_InvertedUV.setFont(font3)
+        self.fr_InvertedUV.setStyleSheet(u"QFrame {\n"
+"    background-color: rgb(80, 80, 80);\n"
+"    border: 3px solid rgb(30, 30, 30); \n"
+"    border-radius: 10px;                \n"
+"}\n"
+"\n"
+"QFrame[status=\"ok\"] {\n"
+"    background-color: rgb(0, 200, 0);\n"
+"    border: 3px solid rgb(0, 120, 0);\n"
+"}\n"
+"\n"
+"QFrame[status=\"warning\"] {\n"
+"    background-color: rgb(255, 180, 0);\n"
+"    border: 3px solid rgb(180, 120, 0);\n"
+"}\n"
+"\n"
+"QFrame[status=\"error\"] {\n"
+"    background-color: rgb(220, 50, 50);\n"
+"    border: 3px solid rgb(140, 20, 20);\n"
+"}")
+        self.fr_InvertedUV.setFrameShape(QFrame.Shape.NoFrame)
+        self.fr_InvertedUV.setFrameShadow(QFrame.Shadow.Raised)
+
+        self.verticalLayout_uv_02.addWidget(self.fr_InvertedUV)
+
+        self.fr_UVOutRange = QFrame(self.horizontalLayoutWidget_2)
+        self.fr_UVOutRange.setObjectName(u"fr_UVOutRange")
+        self.fr_UVOutRange.setMinimumSize(QSize(18, 18))
+        self.fr_UVOutRange.setMaximumSize(QSize(18, 18))
+        self.fr_UVOutRange.setFont(font3)
+        self.fr_UVOutRange.setStyleSheet(u"QFrame {\n"
+"    background-color: rgb(80, 80, 80);\n"
+"    border: 3px solid rgb(30, 30, 30); \n"
+"    border-radius: 10px;                \n"
+"}\n"
+"\n"
+"QFrame[status=\"ok\"] {\n"
+"    background-color: rgb(0, 200, 0);\n"
+"    border: 3px solid rgb(0, 120, 0);\n"
+"}\n"
+"\n"
+"QFrame[status=\"warning\"] {\n"
+"    background-color: rgb(255, 180, 0);\n"
+"    border: 3px solid rgb(180, 120, 0);\n"
+"}\n"
+"\n"
+"QFrame[status=\"error\"] {\n"
+"    background-color: rgb(220, 50, 50);\n"
+"    border: 3px solid rgb(140, 20, 20);\n"
+"}")
+        self.fr_UVOutRange.setFrameShape(QFrame.Shape.NoFrame)
+        self.fr_UVOutRange.setFrameShadow(QFrame.Shadow.Raised)
+
+        self.verticalLayout_uv_02.addWidget(self.fr_UVOutRange)
+
+        self.fr_UVSetName = QFrame(self.horizontalLayoutWidget_2)
+        self.fr_UVSetName.setObjectName(u"fr_UVSetName")
+        self.fr_UVSetName.setMinimumSize(QSize(18, 18))
+        self.fr_UVSetName.setMaximumSize(QSize(18, 18))
+        self.fr_UVSetName.setFont(font3)
+        self.fr_UVSetName.setStyleSheet(u"QFrame {\n"
+"    background-color: rgb(80, 80, 80);\n"
+"    border: 3px solid rgb(30, 30, 30); \n"
+"    border-radius: 10px;                \n"
+"}\n"
+"\n"
+"QFrame[status=\"ok\"] {\n"
+"    background-color: rgb(0, 200, 0);\n"
+"    border: 3px solid rgb(0, 120, 0);\n"
+"}\n"
+"\n"
+"QFrame[status=\"warning\"] {\n"
+"    background-color: rgb(255, 180, 0);\n"
+"    border: 3px solid rgb(180, 120, 0);\n"
+"}\n"
+"\n"
+"QFrame[status=\"error\"] {\n"
+"    background-color: rgb(220, 50, 50);\n"
+"    border: 3px solid rgb(140, 20, 20);\n"
+"}")
+        self.fr_UVSetName.setFrameShape(QFrame.Shape.NoFrame)
+        self.fr_UVSetName.setFrameShadow(QFrame.Shadow.Raised)
+
+        self.verticalLayout_uv_02.addWidget(self.fr_UVSetName)
+
 
         self.horizontalLayout_uv.addLayout(self.verticalLayout_uv_02)
 
@@ -578,6 +687,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_MisUV.setIconSize(QSize(18, 18))
 
         self.verticalLayout_uv_03.addWidget(self.btnCh_MisUV)
 
@@ -603,6 +713,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_MoreUV.setIconSize(QSize(18, 18))
 
         self.verticalLayout_uv_03.addWidget(self.btnCh_MoreUV)
 
@@ -628,8 +739,87 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_Overlap.setIconSize(QSize(18, 18))
 
         self.verticalLayout_uv_03.addWidget(self.btnCh_Overlap)
+
+        self.btnCh_InvertedUV = QPushButton(self.horizontalLayoutWidget_2)
+        self.btnCh_InvertedUV.setObjectName(u"btnCh_InvertedUV")
+        self.btnCh_InvertedUV.setStyleSheet(u"QPushButton {\n"
+"    font:10pt \"Bahnschrift SemiBold SemiConden\";\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(40, 40, 40);\n"
+"\n"
+"    border: 1px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 3px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    background-color: rgb(25, 25, 25);\n"
+"    border: 3px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnCh_InvertedUV.setIconSize(QSize(18, 18))
+
+        self.verticalLayout_uv_03.addWidget(self.btnCh_InvertedUV)
+
+        self.btnCh_UVOutRange = QPushButton(self.horizontalLayoutWidget_2)
+        self.btnCh_UVOutRange.setObjectName(u"btnCh_UVOutRange")
+        self.btnCh_UVOutRange.setStyleSheet(u"QPushButton {\n"
+"    font:10pt \"Bahnschrift SemiBold SemiConden\";\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(40, 40, 40);\n"
+"\n"
+"    border: 1px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 3px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    background-color: rgb(25, 25, 25);\n"
+"    border: 3px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnCh_UVOutRange.setIconSize(QSize(18, 18))
+
+        self.verticalLayout_uv_03.addWidget(self.btnCh_UVOutRange)
+
+        self.btnCh_UVSetName = QPushButton(self.horizontalLayoutWidget_2)
+        self.btnCh_UVSetName.setObjectName(u"btnCh_UVSetName")
+        self.btnCh_UVSetName.setStyleSheet(u"QPushButton {\n"
+"    font:10pt \"Bahnschrift SemiBold SemiConden\";\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(40, 40, 40);\n"
+"\n"
+"    border: 1px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 3px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    background-color: rgb(25, 25, 25);\n"
+"    border: 3px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnCh_UVSetName.setIconSize(QSize(18, 18))
+
+        self.verticalLayout_uv_03.addWidget(self.btnCh_UVSetName)
 
 
         self.horizontalLayout_uv.addLayout(self.verticalLayout_uv_03)
@@ -637,13 +827,13 @@ class Ui_mainWindow(object):
         self.horizontalLayout_uv.setStretch(0, 1)
         self.lbl_Texture = QLabel(self.centralwidget)
         self.lbl_Texture.setObjectName(u"lbl_Texture")
-        self.lbl_Texture.setGeometry(QRect(13, 232, 155, 16))
+        self.lbl_Texture.setGeometry(QRect(13, 334, 155, 16))
         self.lbl_Texture.setFont(font2)
         self.lbl_Texture.setStyleSheet(u"color: rgb(128, 200, 255);\n"
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
         self.horizontalLayoutWidget_3 = QWidget(self.centralwidget)
         self.horizontalLayoutWidget_3.setObjectName(u"horizontalLayoutWidget_3")
-        self.horizontalLayoutWidget_3.setGeometry(QRect(10, 249, 319, 80))
+        self.horizontalLayoutWidget_3.setGeometry(QRect(11, 352, 319, 102))
         self.horizontalLayout_tex = QHBoxLayout(self.horizontalLayoutWidget_3)
         self.horizontalLayout_tex.setObjectName(u"horizontalLayout_tex")
         self.horizontalLayout_tex.setContentsMargins(0, 0, 0, 0)
@@ -663,6 +853,11 @@ class Ui_mainWindow(object):
         self.chbx_UnusedMaterials.setObjectName(u"chbx_UnusedMaterials")
 
         self.verticalLayout_tex_01.addWidget(self.chbx_UnusedMaterials)
+
+        self.chbx_ColorSet = QCheckBox(self.horizontalLayoutWidget_3)
+        self.chbx_ColorSet.setObjectName(u"chbx_ColorSet")
+
+        self.verticalLayout_tex_01.addWidget(self.chbx_ColorSet)
 
 
         self.horizontalLayout_tex.addLayout(self.verticalLayout_tex_01)
@@ -759,6 +954,36 @@ class Ui_mainWindow(object):
 
         self.verticalLayout_tex_02.addWidget(self.fr_UnusedMaterials)
 
+        self.fr_ColorSet = QFrame(self.horizontalLayoutWidget_3)
+        self.fr_ColorSet.setObjectName(u"fr_ColorSet")
+        self.fr_ColorSet.setMinimumSize(QSize(18, 18))
+        self.fr_ColorSet.setMaximumSize(QSize(18, 18))
+        self.fr_ColorSet.setFont(font3)
+        self.fr_ColorSet.setStyleSheet(u"QFrame {\n"
+"    background-color: rgb(80, 80, 80);\n"
+"    border: 3px solid rgb(30, 30, 30); \n"
+"    border-radius: 10px;                \n"
+"}\n"
+"\n"
+"QFrame[status=\"ok\"] {\n"
+"    background-color: rgb(0, 200, 0);\n"
+"    border: 3px solid rgb(0, 120, 0);\n"
+"}\n"
+"\n"
+"QFrame[status=\"warning\"] {\n"
+"    background-color: rgb(255, 180, 0);\n"
+"    border: 3px solid rgb(180, 120, 0);\n"
+"}\n"
+"\n"
+"QFrame[status=\"error\"] {\n"
+"    background-color: rgb(220, 50, 50);\n"
+"    border: 3px solid rgb(140, 20, 20);\n"
+"}")
+        self.fr_ColorSet.setFrameShape(QFrame.Shape.NoFrame)
+        self.fr_ColorSet.setFrameShadow(QFrame.Shadow.Raised)
+
+        self.verticalLayout_tex_02.addWidget(self.fr_ColorSet)
+
 
         self.horizontalLayout_tex.addLayout(self.verticalLayout_tex_02)
 
@@ -786,6 +1011,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_MissingTextures.setIconSize(QSize(18, 18))
 
         self.verticalLayout_tex_03.addWidget(self.btnCh_MissingTextures)
 
@@ -811,6 +1037,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_InvalidTexturePath.setIconSize(QSize(18, 18))
 
         self.verticalLayout_tex_03.addWidget(self.btnCh_InvalidTexturePath)
 
@@ -836,8 +1063,35 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_UnusedMaterials.setIconSize(QSize(18, 18))
 
         self.verticalLayout_tex_03.addWidget(self.btnCh_UnusedMaterials)
+
+        self.btnCh_ColorSet = QPushButton(self.horizontalLayoutWidget_3)
+        self.btnCh_ColorSet.setObjectName(u"btnCh_ColorSet")
+        self.btnCh_ColorSet.setStyleSheet(u"QPushButton {\n"
+"    font:10pt \"Bahnschrift SemiBold SemiConden\";\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(40, 40, 40);\n"
+"\n"
+"    border: 1px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 3px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    background-color: rgb(25, 25, 25);\n"
+"    border: 3px solid rgb(24, 103, 155);\n"
+"    border-radius: 4px;\n"
+"}")
+        self.btnCh_ColorSet.setIconSize(QSize(18, 18))
+
+        self.verticalLayout_tex_03.addWidget(self.btnCh_ColorSet)
 
 
         self.horizontalLayout_tex.addLayout(self.verticalLayout_tex_03)
@@ -845,7 +1099,7 @@ class Ui_mainWindow(object):
         self.horizontalLayout_tex.setStretch(0, 1)
         self.horizontalLayoutWidget_4 = QWidget(self.centralwidget)
         self.horizontalLayoutWidget_4.setObjectName(u"horizontalLayoutWidget_4")
-        self.horizontalLayoutWidget_4.setGeometry(QRect(9, 472, 320, 102))
+        self.horizontalLayoutWidget_4.setGeometry(QRect(369, 28, 261, 103))
         self.horizontalLayout_scene = QHBoxLayout(self.horizontalLayoutWidget_4)
         self.horizontalLayout_scene.setObjectName(u"horizontalLayout_scene")
         self.horizontalLayout_scene.setContentsMargins(0, 0, 0, 0)
@@ -1023,6 +1277,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_EmptyTransform.setIconSize(QSize(18, 18))
 
         self.verticalLayout_scene_03.addWidget(self.btnCh_EmptyTransform)
 
@@ -1048,6 +1303,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_HiddenObj.setIconSize(QSize(18, 18))
 
         self.verticalLayout_scene_03.addWidget(self.btnCh_HiddenObj)
 
@@ -1073,6 +1329,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_FrozenTransform.setIconSize(QSize(18, 18))
 
         self.verticalLayout_scene_03.addWidget(self.btnCh_FrozenTransform)
 
@@ -1098,6 +1355,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_History.setIconSize(QSize(18, 18))
 
         self.verticalLayout_scene_03.addWidget(self.btnCh_History)
 
@@ -1107,13 +1365,13 @@ class Ui_mainWindow(object):
         self.horizontalLayout_scene.setStretch(0, 1)
         self.lbl_Scene = QLabel(self.centralwidget)
         self.lbl_Scene.setObjectName(u"lbl_Scene")
-        self.lbl_Scene.setGeometry(QRect(10, 451, 173, 20))
+        self.lbl_Scene.setGeometry(QRect(374, 8, 173, 20))
         self.lbl_Scene.setFont(font2)
         self.lbl_Scene.setStyleSheet(u"color: rgb(128, 200, 255);\n"
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
         self.horizontalLayoutWidget_5 = QWidget(self.centralwidget)
         self.horizontalLayoutWidget_5.setObjectName(u"horizontalLayoutWidget_5")
-        self.horizontalLayoutWidget_5.setGeometry(QRect(10, 359, 319, 80))
+        self.horizontalLayoutWidget_5.setGeometry(QRect(10, 480, 319, 80))
         self.horizontalLayout_name = QHBoxLayout(self.horizontalLayoutWidget_5)
         self.horizontalLayout_name.setObjectName(u"horizontalLayout_name")
         self.horizontalLayout_name.setContentsMargins(0, 0, 0, 0)
@@ -1256,6 +1514,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_DefaultName.setIconSize(QSize(18, 18))
 
         self.verticalLayout_name_03.addWidget(self.btnCh_DefaultName)
 
@@ -1315,7 +1574,7 @@ class Ui_mainWindow(object):
         self.horizontalLayout_name.setStretch(0, 1)
         self.lbl_Naming = QLabel(self.centralwidget)
         self.lbl_Naming.setObjectName(u"lbl_Naming")
-        self.lbl_Naming.setGeometry(QRect(11, 340, 173, 20))
+        self.lbl_Naming.setGeometry(QRect(11, 458, 173, 20))
         self.lbl_Naming.setFont(font2)
         self.lbl_Naming.setStyleSheet(u"color: rgb(128, 200, 255);\n"
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
@@ -1326,7 +1585,7 @@ class Ui_mainWindow(object):
         self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
         self.horizontalLayoutWidget_6 = QWidget(self.centralwidget)
         self.horizontalLayoutWidget_6.setObjectName(u"horizontalLayoutWidget_6")
-        self.horizontalLayoutWidget_6.setGeometry(QRect(386, 33, 242, 128))
+        self.horizontalLayoutWidget_6.setGeometry(QRect(370, 149, 259, 128))
         self.horizontalLayout_engine = QHBoxLayout(self.horizontalLayoutWidget_6)
         self.horizontalLayout_engine.setObjectName(u"horizontalLayout_engine")
         self.horizontalLayout_engine.setContentsMargins(0, 0, 0, 0)
@@ -1539,6 +1798,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_PivotCenter.setIconSize(QSize(18, 18))
 
         self.verticalLayout_engine_03.addWidget(self.btnCh_PivotCenter)
 
@@ -1564,6 +1824,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_RotateZero.setIconSize(QSize(18, 18))
 
         self.verticalLayout_engine_03.addWidget(self.btnCh_RotateZero)
 
@@ -1589,6 +1850,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_Scale.setIconSize(QSize(18, 18))
 
         self.verticalLayout_engine_03.addWidget(self.btnCh_Scale)
 
@@ -1614,6 +1876,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_TrisCount.setIconSize(QSize(18, 18))
 
         self.verticalLayout_engine_03.addWidget(self.btnCh_TrisCount)
 
@@ -1639,6 +1902,7 @@ class Ui_mainWindow(object):
 "    border: 3px solid rgb(24, 103, 155);\n"
 "    border-radius: 4px;\n"
 "}")
+        self.btnCh_NgonGroup.setIconSize(QSize(18, 18))
 
         self.verticalLayout_engine_03.addWidget(self.btnCh_NgonGroup)
 
@@ -1648,13 +1912,13 @@ class Ui_mainWindow(object):
         self.horizontalLayout_engine.setStretch(0, 1)
         self.lbl_Engine = QLabel(self.centralwidget)
         self.lbl_Engine.setObjectName(u"lbl_Engine")
-        self.lbl_Engine.setGeometry(QRect(389, 10, 143, 16))
+        self.lbl_Engine.setGeometry(QRect(374, 130, 143, 16))
         self.lbl_Engine.setFont(font2)
         self.lbl_Engine.setStyleSheet(u"color: rgb(128, 200, 255);\n"
 "font:10pt  \"Bahnschrift SemiBold SemiConden\";")
         self.horizontalLayoutWidget_7 = QWidget(self.centralwidget)
         self.horizontalLayoutWidget_7.setObjectName(u"horizontalLayoutWidget_7")
-        self.horizontalLayoutWidget_7.setGeometry(QRect(376, 356, 247, 225))
+        self.horizontalLayoutWidget_7.setGeometry(QRect(750, 387, 247, 225))
         self.horizontalLayout_3rd_Tool = QHBoxLayout(self.horizontalLayoutWidget_7)
         self.horizontalLayout_3rd_Tool.setSpacing(14)
         self.horizontalLayout_3rd_Tool.setObjectName(u"horizontalLayout_3rd_Tool")
@@ -1871,7 +2135,7 @@ class Ui_mainWindow(object):
 
         self.btnCheckAll = QPushButton(self.centralwidget)
         self.btnCheckAll.setObjectName(u"btnCheckAll")
-        self.btnCheckAll.setGeometry(QRect(385, 172, 69, 35))
+        self.btnCheckAll.setGeometry(QRect(371, 334, 69, 35))
         self.btnCheckAll.setStyleSheet(u"QPushButton {\n"
 "    font:10pt \"Bahnschrift SemiBold SemiConden\";\n"
 "    color: rgb(255, 255, 255);\n"
@@ -1894,7 +2158,7 @@ class Ui_mainWindow(object):
 "}")
         self.btnRun = QPushButton(self.centralwidget)
         self.btnRun.setObjectName(u"btnRun")
-        self.btnRun.setGeometry(QRect(460, 172, 169, 35))
+        self.btnRun.setGeometry(QRect(446, 334, 169, 35))
         self.btnRun.setStyleSheet(u"QPushButton {\n"
 "    font:10pt \"Bahnschrift SemiBold SemiConden\";\n"
 "    color: rgb(255, 255, 255);\n"
@@ -1917,7 +2181,7 @@ class Ui_mainWindow(object):
 "}")
         self.progressBar = QProgressBar(self.centralwidget)
         self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setGeometry(QRect(389, 218, 239, 32))
+        self.progressBar.setGeometry(QRect(372, 380, 242, 32))
         self.progressBar.setValue(24)
         mainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(mainWindow)
@@ -1997,16 +2261,24 @@ class Ui_mainWindow(object):
         self.chbx_MisUV.setText(QCoreApplication.translate("mainWindow", u"Missing UV", None))
         self.chbx_MoreUV.setText(QCoreApplication.translate("mainWindow", u"More than 1 UV Channel", None))
         self.chbx_OverlapUV.setText(QCoreApplication.translate("mainWindow", u"Overlapping UV", None))
+        self.chbx_InvertedUV.setText(QCoreApplication.translate("mainWindow", u"UV Inverted", None))
+        self.chbx_UVOutRange.setText(QCoreApplication.translate("mainWindow", u"UV Out Range", None))
+        self.chbx_UVSetName.setText(QCoreApplication.translate("mainWindow", u"UV Set Name", None))
         self.btnCh_MisUV.setText(QCoreApplication.translate("mainWindow", u"Check", None))
         self.btnCh_MoreUV.setText(QCoreApplication.translate("mainWindow", u"Check", None))
         self.btnCh_Overlap.setText(QCoreApplication.translate("mainWindow", u"Check", None))
+        self.btnCh_InvertedUV.setText(QCoreApplication.translate("mainWindow", u"Check", None))
+        self.btnCh_UVOutRange.setText(QCoreApplication.translate("mainWindow", u"Check", None))
+        self.btnCh_UVSetName.setText(QCoreApplication.translate("mainWindow", u"Check", None))
         self.lbl_Texture.setText(QCoreApplication.translate("mainWindow", u"Texture / Material", None))
         self.chbx_MissingTextures.setText(QCoreApplication.translate("mainWindow", u"Missing Textures", None))
         self.chbx_InvalidTexturePath.setText(QCoreApplication.translate("mainWindow", u"Invalid Texture Path", None))
         self.chbx_UnusedMaterials.setText(QCoreApplication.translate("mainWindow", u"Unused Materials", None))
+        self.chbx_ColorSet.setText(QCoreApplication.translate("mainWindow", u"ColorSet", None))
         self.btnCh_MissingTextures.setText(QCoreApplication.translate("mainWindow", u"Check", None))
         self.btnCh_InvalidTexturePath.setText(QCoreApplication.translate("mainWindow", u"Check", None))
         self.btnCh_UnusedMaterials.setText(QCoreApplication.translate("mainWindow", u"Check", None))
+        self.btnCh_ColorSet.setText(QCoreApplication.translate("mainWindow", u"Check", None))
         self.chbx_EmptyTransform.setText(QCoreApplication.translate("mainWindow", u"Empty Transform", None))
         self.chbx_HiddenObj.setText(QCoreApplication.translate("mainWindow", u"Hidden Objects (optional)", None))
         self.chbx_FrozenTransform.setText(QCoreApplication.translate("mainWindow", u"Frozen Transform (optional)", None))

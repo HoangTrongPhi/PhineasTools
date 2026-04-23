@@ -3,6 +3,7 @@
     Author: HOANG TRONG PHI
     22/4/2026
     Maya 2026+ (Python 3)
+    Notes: Check Mesh Instance
 """
 
 import maya.cmds as cmds

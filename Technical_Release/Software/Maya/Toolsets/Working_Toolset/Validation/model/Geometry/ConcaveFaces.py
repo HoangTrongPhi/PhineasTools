@@ -63,7 +63,7 @@ def fix(*args):
 def doc(*args):
     return (
         "Concave Faces:\n"
-        "- Face bị lõm (non-convex), có thể gây lỗi shading hoặc export game engine.\n\n"
+        "- Face bị lõm (non-convex), có thể gây lỗi shading hoặc export game engine lỗi.\n\n"
         "How To Fix:\n"
         "- Di chuyển vertex để mặt trở thành convex\n"
         "- Hoặc triangulate / retopology lại mesh"

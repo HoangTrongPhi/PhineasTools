@@ -1,45 +1,58 @@
-# uncompyle6 version 3.9.1
-# Python bytecode version base 2.7 (62211)
-# Decompiled from: Python 3.12.4 (tags/v3.12.4:8e8a4ba, Jun  6 2024, 19:30:16) [MSC v.1940 64 bit (AMD64)]
-# Embedded file name: G:/Technical_Dev\Maya\Toolsets\Validation_Toolset\Projects\COMMON\Naming\SuffixNumber.py
-# Compiled at: 2021-06-26 21:43:23
+# -*- coding: utf-8 -*-
 """
-        SuffixNumber.py
-    Created by otis - Nguyen Dang Khoa at 7/29/2020
-    Update 11:16 AM - 29/07/2020
-    
- """
+    Author: HOANG TRONG PHI (Optimized)
+    22/4/2026
+    Maya 2026+ (Python 3)
+"""
 import maya.cmds as cmds
+import re
 
 name = 'Suffix Number'
 check = 0
 fixAble = 0
 
+
 def run(nodes, selectionMesh):
     print(f'Running {__name__}')
-    numbers = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
+
     trailing_numbers = []
+
     for node in nodes:
         mesh = node
+
+        # Ensure transform
         if cmds.objectType(node) != 'transform':
             parents = cmds.listRelatives(node, parent=True, fullPath=True)
             if parents:
                 mesh = parents[0]
-        if mesh and mesh[-1] in numbers:
+
+        if not mesh:
+            continue
+
+        # Lấy short name (tránh full path)
+        short_name = mesh.split('|')[-1]
+
+        # Check suffix number (vd: mesh_01, mesh_2, mesh10)
+        if re.search(r'\d+$', short_name):
             trailing_numbers.append(mesh)
 
     return trailing_numbers
 
 
-def fix(*arg):
+def fix(*args):
     print('Fixing...')
+    # Chưa implement vì cần quyết định rule rename
     return 1
 
 
-def doc(*arg):
-    mess = 'Suffix Number: Ten mesh co them cac so o phia sau\nCo the do loi duplicate\n\nCo the fix hoac bo qua!'
-    return mess
+def doc(*args):
+    return (
+        'Suffix Number:\n'
+        '- Ten mesh co so o cuoi (vd: mesh_01, mesh_2)\n'
+        '- Thuong do duplicate khong clean\n\n'
+        'Nen rename de clean pipeline!'
+    )
 
 
-def report(*arg):
+def report(*args):
     return 1

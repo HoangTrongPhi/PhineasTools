@@ -3,6 +3,8 @@
     Author: HOANG TRONG PHI
     22/4/2026
     Maya 2026+ Compatible (Python 3)
+
+    Notes: Check Mesh đang sử dụng Shader Maya mặc định (Lambert1)
 """
 
 import maya.cmds as cmds

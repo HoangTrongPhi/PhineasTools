@@ -3,6 +3,7 @@
     Author: HOANG TRONG PHI
     Date: 22/04/2026
     Maya 2026+ (Python 3)
+    Notes: Check Mesh có 2 UV set
 """
 
 import maya.cmds as cmds

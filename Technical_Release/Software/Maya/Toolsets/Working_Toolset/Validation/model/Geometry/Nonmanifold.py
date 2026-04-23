@@ -1,40 +1,76 @@
-# uncompyle6 version 3.9.1
-# Python bytecode version base 2.7 (62211)
-# Decompiled from: Python 3.12.4 (tags/v3.12.4:8e8a4ba, Jun  6 2024, 19:30:16) [MSC v.1940 64 bit (AMD64)]
-# Embedded file name: G:/Technical_Dev\Maya\Toolsets\Validation_Toolset\Projects\COMMON\Geometry\Nonmanifold.py
-# Compiled at: 2021-06-26 21:43:23
+# -*- coding: utf-8 -*-
 """
-        Nonmanifold.py
-    Created by otis - Nguyen Dang Khoa at 8/17/2020
-    Update 3:10 PM - 17/08/2020
-    
- """
-import maya.cmds as cmds, maya.mel as mel, maya.api.OpenMaya as om, sys
+    Author: HOANG TRONG PHI
+    Maya 2026+ (Python 3)
+    23/4/2026
+"""
+
+import maya.api.OpenMaya as om
+import maya.cmds as cmds
+
 name = 'Nonmanifold'
 check = 1
 fixAble = 0
 
-def run(nodes, selectionMesh):
-    print 'Running ' + __name__
-    currSel = cmds.ls(selection=True) or []
-    cmds.select(nodes)
-    mel.eval('polyCleanupArgList 4 { "0","2","1","0","0","0","0","0","0","1e-05","0","0.01","0","1e-05","0","1","0","0" };')
-    nonManifoldVertex = cmds.ls(selection=True) or []
-    if currSel == []:
-        cmds.selectMode(object=True)
-    cmds.select(currSel)
-    return nonManifoldVertex
+
+def run(nodes=None, selectionMesh=None):
+    """
+    Kiểm tra non-manifold vertices bằng Maya API (nhanh + không đổi selection)
+    """
+    print('Running ' + __name__)
+
+    if not nodes:
+        return []
+
+    non_manifold = []
+
+    # Convert nodes -> selection list (API)
+    sel_list = om.MSelectionList()
+    for node in nodes:
+        try:
+            sel_list.add(node)
+        except:
+            continue
+
+    sel_it = om.MItSelectionList(sel_list, om.MFn.kMesh)
+
+    while not sel_it.isDone():
+        dagPath = sel_it.getDagPath()
+        meshFn = om.MFnMesh(dagPath)
+
+        try:
+            verts = meshFn.getNonManifoldVertices()
+        except:
+            verts = []
+
+        if verts:
+            mesh_name = dagPath.fullPathName()
+            non_manifold.extend(
+                ["{}.vtx[{}]".format(mesh_name, v) for v in verts]
+            )
+
+        sel_it.next()
+
+    return non_manifold
 
 
-def fix(*arg):
-    print 'Fixing...'
+def fix(*args):
+    """
+    Non-manifold thường không auto fix chuẩn → giữ nguyên
+    """
+    print('Fixing...')
     return 1
 
 
-def doc(*arg):
-    mess = 'Nonmanifold: 1 mesh 3D  khong the trai ra thanh 2D duoc\n\nHowToFix: Can dieu chinh luoi lai cho hop ly'
-    return mess
+def doc(*args):
+    return (
+        'Nonmanifold: Mesh có cấu trúc topology sai (đỉnh/cạnh chia sẻ bất thường)\n\n'
+        'HowToFix:\n'
+        '- Merge vertices hợp lý\n'
+        '- Xóa face chồng chéo\n'
+        '- Retopology nếu cần'
+    )
 
 
-def report(*arg):
+def report(*args):
     return 1
