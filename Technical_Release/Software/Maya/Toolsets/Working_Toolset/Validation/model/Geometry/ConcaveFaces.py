@@ -21,26 +21,17 @@ def run(nodes=None, selectionMesh=None):
 
     if not nodes:
         return []
-
-    # Save current selection
     original_selection = cmds.ls(selection=True, long=True) or []
-
     try:
-        # Select target nodes
         cmds.select(nodes, r=True)
-
-        # Run poly cleanup (concave faces)
         mel.eval(
             'polyCleanupArgList 4 { "0","2","1","0","0","1","0","0","0","0.001","0","0.01","0","1e-05","0","-1","0","0" }'
         )
-
-        # Get result
         concave_faces = cmds.ls(selection=True, long=True) or []
 
     except Exception as e:
         print(f'[Concave] Error: {e}')
         concave_faces = []
-
     finally:
         # Restore selection safely
         if original_selection:
@@ -48,9 +39,7 @@ def run(nodes=None, selectionMesh=None):
         else:
             cmds.select(clear=True)
             cmds.selectMode(object=True)
-
     return concave_faces
-
 
 def fix(*args):
     """

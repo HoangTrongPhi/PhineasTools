@@ -3,6 +3,7 @@ import os
 import sys
 from maya import OpenMayaUI as omui
 
+
 try:
     from shiboken2 import wrapInstance
 
@@ -21,6 +22,9 @@ except:
     from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QCheckBox, QPushButton, QFileDialog
     from PySide6.QtGui import QPixmap, QIcon
     from PySide6.QtCore import QObject, Qt
+    from PySide6.QtWidgets import QApplication
+
+    from PySide6.QtWidgets import QApplication
 
 import importlib
 
@@ -49,7 +53,26 @@ importlib.reload(NonManifold)
 
 import Software.Maya.Toolsets.Working_Toolset.Validation.model.Geometry.ZeroEdegeLength as ZeroEdegeLength
 importlib.reload(ZeroEdegeLength)
+
 #--- UV---
+import Software.Maya.Toolsets.Working_Toolset.Validation.model.UV.MapChannelInfo as MapChannelInfo
+importlib.reload(MapChannelInfo)
+
+import Software.Maya.Toolsets.Working_Toolset.Validation.model.UV.MissingUV as MissingUV
+importlib.reload(MissingUV)
+
+import Software.Maya.Toolsets.Working_Toolset.Validation.model.UV.OverlappedUV as OverlappedUV
+importlib.reload(OverlappedUV)
+
+import Software.Maya.Toolsets.Working_Toolset.Validation.model.UV.UVInverted as UVInverted
+importlib.reload(UVInverted)
+
+import Software.Maya.Toolsets.Working_Toolset.Validation.model.UV.UVOutRange as UVOutRange
+importlib.reload(UVOutRange)
+
+import Software.Maya.Toolsets.Working_Toolset.Validation.model.UV.UVSetName as UVSetName
+importlib.reload(UVSetName)
+
 
 def getDirectoryofModule(modulename):
     """
@@ -109,7 +132,14 @@ class ValidationControl(QtWidgets.QMainWindow):
             self.ui.fr_ConcaveFaces,
             self.ui.fr_LaminaFaces,
             self.ui.fr_NonManifold,
-            self.ui.fr_ZeroEdge
+            self.ui.fr_ZeroEdge,
+
+            self.ui.fr_MisUV,
+            self.ui.fr_MoreUV,
+            self.ui.fr_OverlapUV,
+            self.ui.fr_InvertedUV,
+            self.ui.fr_UVOutRange,
+            self.ui.fr_UVSetName,
         ]
 
         for fr in frames:
@@ -122,6 +152,13 @@ class ValidationControl(QtWidgets.QMainWindow):
             self.ui.chbx_LanimaFaces: (self.checkLaminaFaces, self.ui.fr_LaminaFaces),
             self.ui.chbx_NonManifold: (self.checkNonManifold, self.ui.fr_NonManifold),
             self.ui.chbx_ZeroEdge: (self.checkZeroEdge, self.ui.fr_ZeroEdge),
+
+            # --- UV Mapping ---
+            self.ui.chbx_MisUV: (self.checkMissUV, self.ui.fr_MisUV),
+            self.ui.chbx_OverlapUV: (self.checkOverlapUV, self.ui.fr_OverlapUV),
+            self.ui.chbx_InvertedUV: (self.checkUVInverted, self.ui.fr_InvertedUV),
+            self.ui.chbx_UVOutRange: (self.checkUVOutRange, self.ui.fr_UVOutRange),
+            self.ui.chbx_UVSetName: (self.checkUVSetName, self.ui.fr_UVSetName),
         }
 
     # ===============================
@@ -133,6 +170,11 @@ class ValidationControl(QtWidgets.QMainWindow):
         """
         self.ui.btnRefreshTool.clicked.connect(self.refresh)
 
+        self.ui.progressBar.setMinimum(0)
+        self.ui.progressBar.setMaximum(100)
+        self.ui.progressBar.setValue(0)
+
+
         # check từng cái
         # --- Geometry ---
         self.ui.btnCh_ConcaveFaces.clicked.connect(self.runCheckConcave)
@@ -140,8 +182,16 @@ class ValidationControl(QtWidgets.QMainWindow):
         self.ui.btnCh_NonManifold.clicked.connect(self.runCheckNonManifold)
         self.ui.btnCh_ZeroEdge.clicked.connect(self.runCheckZeroEdge)
 
+        #---- UV ----
+        self.ui.btnCh_MisUV.clicked.connect(self.runCheckMissUV)
+        self.ui.btnCh_Overlap.clicked.connect(self.runOverlapUV)
+        self.ui.btnCh_InvertedUV.clicked.connect(self.runUVInverted)
+        self.ui.btnCh_UVOutRange.clicked.connect(self.runUVOutRange)
+        self.ui.btnCh_UVSetName.clicked.connect(self.runUVSetName)
 
-        # self.ui.btnCheckAll.clicked.connect(self.runAllChecks)
+
+        # self.ui.btnCheckAll.clicked.connect(self.)
+        self.ui.btnRun.clicked.connect(self.runAllChecks)
     # ============== UTILS ==============
     # ===================================
 
@@ -170,7 +220,11 @@ class ValidationControl(QtWidgets.QMainWindow):
     def refresh(self):
         # Clear console
         self.ui.txEd_Console.clear()
-        cmds.warning("  Console Reset Done  ")
+        # Reset Progress Bar
+        self.ui.progressBar.setValue(0)
+        # Reset các khung trạng thái về mặc định
+        self.initState()
+        cmds.warning("  Console & UI Reset Done  ")
 
     # ===============================
     # RUN SINGLE CHECK (checkbox gate)
@@ -201,78 +255,118 @@ class ValidationControl(QtWidgets.QMainWindow):
         else:
             self.setStatus(self.ui.fr_ZeroEdge, "warning")
 
+    # ----- UV ------
+    def runCheckMissUV(self):
+        if self.ui.chbx_MisUV.isChecked():
+            self.checkMissUV()
+        else:
+            self.setStatus(self.ui.fr_MisUV, "warning")
+
+    def runCheckMoreThan1UVset(self):
+        if self.ui.chbx_MisUV.isChecked():
+            self.checkMoreThan1UVset()
+        else:
+            self.setStatus(self.ui.fr_MoreUV, "warning")
+
+    def runOverlapUV(self):
+        if self.ui.chbx_MisUV.isChecked():
+            self.checkOverlapUV()
+        else:
+            self.setStatus(self.ui.fr_OverlapUV, "warning")
+
+    def runUVInverted(self):
+        if self.ui.chbx_MisUV.isChecked():
+            self.checkUVInverted()
+        else:
+            self.setStatus(self.ui.fr_InvertedUV, "warning")
+
+    def runUVOutRange(self):
+        if self.ui.chbx_MisUV.isChecked():
+            self.checkUVOutRange()
+        else:
+            self.setStatus(self.ui.fr_UVOutRange, "warning")
+
+    def runUVSetName(self):
+        if self.ui.chbx_MisUV.isChecked():
+            self.checkUVSetName()
+        else:
+            self.setStatus(self.ui.fr_UVSetName, "warning")
     # ===============================
     # CORE CHECK LOGIC
     # ===============================
-
-    def checkConcaveFaces(self):
-        nodes = self.getSelectedMeshes()
+    def _generic_check(self, module, frame, label):
+        nodes = cmds.ls(selection=True, long=True)
 
         if not nodes:
-            self.setStatus(self.ui.fr_ConcaveFaces, "warning")
-            self.log("[Concave] Không có mesh nào được chọn")
+            self.setStatus(frame, "warning")
+            self.log(f"[{label}] Không có mesh nào được chọn")
             return
 
-        result = ConcaveFaces.run(nodes)
+        # luôn đảm bảo đang ở select tool
+        cmds.setToolTo('selectSuperContext')
+
+        # chạy check (module chỉ return data)
+        result = module.run(nodes, selectionMesh=nodes)
 
         if not result:
-            self.setStatus(self.ui.fr_ConcaveFaces, "ok")
-            self.log("[Concave] OK")
+            self.setStatus(frame, "ok")
+            self.log(f"[{label}] OK")
+
+            # restore object mode
+            cmds.select(nodes, r=True)
+            cmds.selectMode(object=True)
+
         else:
-            self.setStatus(self.ui.fr_ConcaveFaces, "error")
-            self.log(f"[Concave] Found {len(result)} faces")
+            self.setStatus(frame, "error")
+            self.log(f"[{label}] Found {len(result)} errors")
+
+            # =========================
+            # FORCE FACE MODE
+            # =========================
+            cmds.selectMode(object=False, component=True)
+            cmds.selectType(allComponents=False)
+            cmds.selectType(polymeshFace=True)
+
+            # hilite mesh
+            meshes = list(set([f.split('.')[0] for f in result]))
+            cmds.hilite(meshes)
+
+            # select lỗi
+            cmds.select(result, r=True)
+
+        return result
+
+    #----- Geometry ------
+    def checkConcaveFaces(self):
+        self._generic_check(ConcaveFaces, self.ui.fr_ConcaveFaces, "Concave Faces")
 
     def checkLaminaFaces(self):
-        nodes = self.getSelectedMeshes()
-
-        if not nodes:
-            self.setStatus(self.ui.fr_LaminaFaces, "warning")
-            self.log("[Lamina] No selection")
-            return
-
-        result = LaminaFaces.run(nodes)
-
-        if not result:
-            self.setStatus(self.ui.fr_LaminaFaces, "ok")
-            self.log("[Lamina] OK")
-        else:
-            self.setStatus(self.ui.fr_LaminaFaces, "error")
-            self.log(f"[Lamina] Found {len(result)}")
+        self._generic_check(LaminaFaces, self.ui.fr_LaminaFaces, "Lamina Faces")
 
     def checkNonManifold(self):
-        nodes = self.getSelectedMeshes()
-
-        if not nodes:
-            self.setStatus(self.ui.fr_NonManifold, "warning")
-            self.log("[NonManifold] No selection")
-            return
-
-        result = NonManifold.run(nodes)
-
-        if not result:
-            self.setStatus(self.ui.fr_NonManifold, "ok")
-            self.log("[NonManifold] OK")
-        else:
-            self.setStatus(self.ui.fr_NonManifold, "error")
-            self.log(f"[NonManifold] Found {len(result)}")
+        self._generic_check(NonManifold, self.ui.fr_NonManifold, "Non-Manifold")
 
     def checkZeroEdge(self):
-        nodes = self.getSelectedMeshes()
+        self._generic_check(ZeroEdegeLength, self.ui.fr_ZeroEdge, "ZeroEdegeLength")
 
-        if not nodes:
-            self.setStatus(self.ui.fr_ZeroEdge, "warning")
-            self.log("[ZeroEdge] No selection")
-            return
+    # ----- UV ------
+    def checkMissUV(self):
+        self._generic_check(MissingUV, self.ui.fr_MisUV, "Missing UV")
 
-        result = ZeroEdegeLength.run(nodes)
+    def checkMoreThan1UVset(self):
+        self._generic_check(MapChannelInfo, self.ui.fr_MoreUV, "More than 1 UV set")
 
-        if not result:
-            self.setStatus(self.ui.fr_ZeroEdge, "ok")
-            self.log("[ZeroEdge] OK")
-        else:
-            self.setStatus(self.ui.fr_ZeroEdge, "error")
-            self.log(f"[ZeroEdge] Found {len(result)}")
+    def checkOverlapUV(self):
+        self._generic_check(OverlappedUV, self.ui.fr_OverlapUV, "Overlap UV")
 
+    def checkUVInverted(self):
+        self._generic_check(UVInverted, self.ui.fr_InvertedUV, "Inverted UV")
+
+    def checkUVOutRange(self):
+        self._generic_check(UVOutRange, self.ui.fr_UVOutRange, "UV Out Range")
+
+    def checkUVSetName(self):
+        self._generic_check(UVSetName, self.ui.fr_UVSetName, "UV Set Name")
 
 
 
@@ -280,11 +374,42 @@ class ValidationControl(QtWidgets.QMainWindow):
     # RUN ALL (optional)
     # ===============================
     def runAllChecks(self):
+        # 1. Lọc ra danh sách các mục thực sự được tick
+
+        items_to_check = []
         for checkbox, (func, frame) in self.checkMap.items():
             if checkbox.isChecked():
-                func()
+                items_to_check.append((func, frame))
             else:
+                # Nếu không chọn thì set status về warning/xám tùy ý
                 self.setStatus(frame, "warning")
+
+        if not items_to_check:
+            self.log(">>> [Warning] Không có mục nào được chọn để kiểm tra!")
+            self.ui.progressBar.setValue(0)
+            return
+
+        # 2. Thiết lập Progress Bar dựa trên số lượng mục đã chọn
+        total_steps = len(items_to_check)
+        self.ui.progressBar.setMinimum(0)
+        self.ui.progressBar.setMaximum(total_steps)
+        self.ui.progressBar.setValue(0)
+
+        self.log(f">>> Bắt đầu kiểm tra {total_steps} mục...")
+
+        # 3. Chạy từng hàm và cập nhật Progress Bar
+        for index, (func, frame) in enumerate(items_to_check):
+            # Chạy hàm kiểm tra (ví dụ: checkConcaveFaces)
+            func()
+
+            # Cập nhật giá trị (index + 1 vì index bắt đầu từ 0)
+            self.ui.progressBar.setValue(index + 1)
+
+            # Quan trọng: Buộc Maya/PySide cập nhật giao diện ngay lập tức
+            # Nếu không có dòng này, thanh bar sẽ đứng im cho đến khi chạy xong hết
+            QtWidgets.QApplication.processEvents()
+
+        self.log(">>> [Done] Xong!")
 
 
 

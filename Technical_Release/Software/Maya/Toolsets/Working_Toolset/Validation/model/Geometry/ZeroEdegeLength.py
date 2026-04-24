@@ -1,92 +1,143 @@
 # -*- coding: utf-8 -*-
 """
     Author: HOANG TRONG PHI
-    Updated: 22/4/2026
+    Updated: 2026-04-24
     Maya 2026+ (Python 3)
 """
 
 import maya.cmds as cmds
 import maya.mel as mel
 
-name = 'EdgeLength < 0.00000001'
+import maya.cmds as cmds, maya.mel as mel, maya.api.OpenMaya as om, sys
+name = 'EdgeLength <0.00000001'
 check = 1
 fixAble = 0
 
+def run(nodes, selectionMesh):
+    print ('Running ' + __name__)
+    currSel = cmds.ls(selection=True) or []
+    cmds.select(nodes)
+    mel.eval('polyCleanupArgList 4 { "0","2","1","0","0","0","0","0","0","1e-05","1","0.01","0","1e-05","0","-1","0","0" }')
+    zeroLengthEdges = cmds.ls(selection=True) or []
+    vertexConnectedList = cmds.polyListComponentConversion(zeroLengthEdges, fromEdge=True, toVertex=True)
+    if currSel == []:
+        cmds.selectMode(object=True)
+    cmds.select(currSel)
+    return vertexConnectedList
 
-def run(nodes=None, selectionMesh=None):
-    """
-    Tìm các edge có độ dài cực nhỏ (gần như bằng 0)
-    Return: danh sách vertex liên quan
-    """
-    print(f'Running {__name__}')
+
+def fix(*arg):
+    print ('Fixing...')
+    return 1
+
+
+def doc(*arg):
+    mess = 'Edge Length: Check cac Edge qua nho\n\nHowToFix: Weld diem lai'
+    return mess
+
+
+def report(*arg):
+    return 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""# Mặc định ban đầu
+name = 'Edge Length Check'
+check = 1
+fixAble = 0
+
+import maya.api.OpenMaya as om
+
+name = 'Close Vertices'
+check = 1
+fixAble = 1  # có thể merge
+
+
+import maya.api.OpenMaya as om
+
+def run(nodes=None, selectionMesh=None, threshold=1):
+    print(f'Running Close Vertices with Threshold: {threshold}')
 
     if not nodes:
         return []
 
-    # Lưu selection hiện tại
-    original_selection = cmds.ls(selection=True) or []
+    bad_vertices = set()
 
-    try:
-        # Select nodes cần check
-        cmds.select(nodes, r=True)
+    #Convert nodes -> MSelectionList
+    selList = om.MSelectionList()
+    for node in nodes:
+        try:
+            selList.add(node)
+        except:
+            pass
 
-        # Cleanup để detect zero-length edges
-        mel.eval(
-            'polyCleanupArgList 4 { "0","2","1","0","0","0","0","0","0","1e-05","1","0.01","0","1e-05","0","-1","0","0" }'
-        )
+    selIt = om.MItSelectionList(selList)
 
-        zero_length_edges = cmds.ls(selection=True) or []
+    while not selIt.isDone():
+        dagPath = selIt.getDagPath()
+        meshFn = om.MFnMesh(dagPath)
 
-        if not zero_length_edges:
-            return []
+        points = meshFn.getPoints(om.MSpace.kWorld)
 
-        # Convert sang vertex
-        vertices = cmds.polyListComponentConversion(
-            zero_length_edges,
-            fromEdge=True,
-            toVertex=True
-        ) or []
+        for i in range(len(points)):
+            p1 = points[i]
+            for j in range(i + 1, len(points)):
+                p2 = points[j]
 
-        # Flatten list (tránh nested list)
-        vertices = cmds.ls(vertices, fl=True) or []
+                if p1.distanceTo(p2) < threshold:
+                    bad_vertices.add(f"{dagPath.fullPathName()}.vtx[{i}]")
+                    bad_vertices.add(f"{dagPath.fullPathName()}.vtx[{j}]")
 
-        return vertices
+        selIt.next()
 
-    except Exception as e:
-        cmds.warning(f'[EdgeLength] Error: {e}')
-        return []
-
-    finally:
-        # Restore selection
-        if original_selection:
-            cmds.select(original_selection, r=True)
-        else:
-            cmds.select(clear=True)
-            cmds.selectMode(object=True)
-
-
-def fix(vertices=None):
-    """
-    Hiện chưa auto fix (vì cần quyết định threshold + topology)
-    """
-    print('Fixing Edge Length... (Not Implemented)')
-    return 0
+    return list(bad_vertices)
 
 
 def doc():
     return (
         'Edge Length:\n'
         '- Kiểm tra các edge có độ dài cực nhỏ (degenerate edges)\n\n'
-        'Nguyên nhân:\n'
-        '- Merge vertex lỗi\n'
-        '- Import model lỗi\n'
-        '- Modeling dirty topology\n\n'
-        'Cách fix:\n'
-        '- Merge/Weld vertex\n'
-        '- Cleanup mesh\n'
-        '- Dùng Merge Threshold hợp lý'
+        'Cách chỉnh tham số:\n'
+        '- Bạn có thể thay đổi threshold trong hàm run() tùy theo scale của scene.'
     )
 
 
 def report():
-    return 1
+    return 1"""

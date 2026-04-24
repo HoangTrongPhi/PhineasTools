@@ -2,59 +2,79 @@
 """
     Author: HOANG TRONG PHI
     Maya 2026+ (Python 3)
-    23/4/2026
+    Updated: 23/4/2026
 """
-import maya.api.OpenMaya as om
+import maya.cmds as cmds, maya.mel as mel, maya.api.OpenMaya as om
 
 name = 'Lamina'
 check = 1
 fixAble = 0
 
-
-def run(nodes=None, selectionMesh=None):
+def run(nodes, selectionMesh):
     print('Running ' + __name__)
+    if not nodes:
+        return []
+    currSel = cmds.ls(selection=True) or []
+    cmds.select(nodes)
+    mel.eval('polyCleanupArgList 4 { "0","2","1","0","0","0","0","0","0","0.001","0","0.01","0","1e-05","0","-1","1","0" }')
+    laminaFaceList = cmds.ls(selection=True) or []
+    #restore selection để tránh side-effect
+    cmds.select(currSel)
+    return laminaFaceList
 
-    laminaFaces = []
+# --------------------------------------------------
+# Core Logic
+# --------------------------------------------------
 
-    #Build selectionMesh nếu chưa có
-    if selectionMesh is None:
-        selectionMesh = om.MSelectionList()
-        for n in nodes or []:
-            selectionMesh.add(n)
+def _get_lamina_faces(dagPath):
+    """
+    Detect lamina faces on a single mesh
+    """
+    faceIt = om.MItMeshPolygon(dagPath)
+    # map: vertex tuple -> face indices
+    face_map = {}
+    lamina = set()
+    while not faceIt.isDone():
+        face_id = faceIt.index()
+        verts = faceIt.getVertices()
+        key = tuple(sorted(verts))  # normalize order
+        if key in face_map:
+            # Found overlap → lamina
+            lamina.add(face_id)
+            lamina.add(face_map[key])
+        else:
+            face_map[key] = face_id
+        faceIt.next()
+    return list(lamina)
 
-    selIt = om.MItSelectionList(selectionMesh)
 
-    while not selIt.isDone():
-        dagPath = selIt.getDagPath()
+# --------------------------------------------------
+# Utils
+# --------------------------------------------------
 
-        if not dagPath.hasFn(om.MFn.kMesh):
-            selIt.next()
-            continue
+def _build_selection(nodes):
+    """
+    Convert node list → MSelectionList
+    """
+    sel = om.MSelectionList()
+    if not nodes:
+        return sel
+    for n in nodes:
+        try:
+            sel.add(n)
+        except:
+            pass
+    return sel
 
-        meshFn = om.MFnMesh(dagPath)
-        faceIt = om.MItMeshPolygon(dagPath)
 
-        objectName = dagPath.fullPathName()
+def doc():
+    return (
+        'Lamina Faces:\n'
+        '- Các mặt (faces) có chung cạnh, face trùng.\n\n'
+        'Cách fix:\n'
+        '- Delete những face bị trùng'
+    )
 
-        faceMap = {}  # key: vertex set, value: list faceIds
 
-        while not faceIt.isDone():
-            faceId = faceIt.index()
-            verts = faceIt.getVertices()
-
-            #key chuẩn: sorted tuple (hashable + nhanh)
-            key = tuple(sorted(verts))
-
-            faceMap.setdefault(key, []).append(faceId)
-
-            faceIt.next()
-
-        #detect lamina (duplicate face)
-        for faces in faceMap.values():
-            if len(faces) > 1:
-                for fid in faces:
-                    laminaFaces.append(f"{objectName}.f[{fid}]")
-
-        selIt.next()
-
-    return laminaFaces
+def report():
+    return 1

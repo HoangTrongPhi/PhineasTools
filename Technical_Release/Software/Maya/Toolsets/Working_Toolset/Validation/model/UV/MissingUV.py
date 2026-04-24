@@ -25,11 +25,18 @@ def _is_mesh(dag_path):
 # =========================
 # CHECK
 # =========================
-def run(nodes, selectionMesh):
+def run(nodes = None, selectionMesh=None):
     print(f'Running {__name__}')
 
     missing_uvs = []
-    sel_it = om.MItSelectionList(selectionMesh)
+    sel_list = om.MSelectionList()
+    for mesh_name in selectionMesh:
+        try:
+            sel_list.add(mesh_name)
+        except:
+            continue  # Bỏ qua nếu tên object không tồn tại
+        # Truyền đối tượng sel_list vào iterator
+    sel_it = om.MItSelectionList(sel_list)
 
     while not sel_it.isDone():
         dag_path = sel_it.getDagPath()

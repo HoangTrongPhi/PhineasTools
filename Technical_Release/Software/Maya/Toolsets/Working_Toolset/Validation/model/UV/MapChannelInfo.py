@@ -19,7 +19,7 @@ FIXABLE = False
 # =========================
 # CORE
 # =========================
-def run(nodes=None, selection_mesh=None):
+def run(nodes=None, selectionMesh=None):
     """
     Check meshes that have more than 1 UV set
     """
