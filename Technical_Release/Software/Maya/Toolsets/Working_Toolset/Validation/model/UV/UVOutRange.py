@@ -6,99 +6,128 @@
 
     note : UV nằm trong vùng hợp lệ
 """
-
+# -*- coding: utf-8 -*-
+"""
+Module: UV Shell OutRange (0,1)
+"""
 import maya.api.OpenMaya as om
 
-name = 'UV OutRange (0,1)'
+name = 'UV Shell OutRange (0,1)'
 check = 1
 fixAble = 0
 
-# CONFIG
-STRICT_MODE = True  # True = chỉ cho phép 0–1, False = cho phép UDIM
+STRICT_MODE = True
+EPS = 1e-6  # Chống float error
 
 
-# =========================
-# CORE
-# =========================
-def _is_mesh(dag):
-    return dag.apiType() == om.MFn.kMesh
+def _to_selection_list(nodes):
+    """
+    Chuyển đổi list string sang MSelectionList để API 2.0 có thể đọc được.
+    """
+    sel = om.MSelectionList()
+    for n in nodes or []:
+        try:
+            sel.add(n)
+        except Exception:
+            pass
+    return sel
 
-
-# =========================
-# CHECK
-# =========================
-def run(nodes, selectionMesh):
-    print(f'Running {__name__}')
-
-    err = []
+def run(nodes=None, selectionMesh=None):
+    print(f'[QC] Running: {name}')
+    # Đảm bảo đầu vào là MSelectionList để tránh lỗi ValueError [cite: 10, 11]
+    if isinstance(selectionMesh, list):
+        selectionMesh = _to_selection_list(selectionMesh)
+    if not selectionMesh or selectionMesh.isEmpty():
+        return []
+    error_faces = set()
     sel_it = om.MItSelectionList(selectionMesh)
-
     while not sel_it.isDone():
-        dag = sel_it.getDagPath()
-
-        # Ensure shape
+        try:
+            dag = sel_it.getDagPath()
+        except Exception:
+            sel_it.next()
+            continue
+        # Tìm đến Shape node
         if dag.apiType() != om.MFn.kMesh:
             try:
                 dag.extendToShape()
-            except:
-                sel_it.next()
-                continue
-
-        if not _is_mesh(dag):
+            except Exception:
+                pass
+        if dag.apiType() != om.MFn.kMesh:
+            sel_it.next()
+            continue
+        mesh_fn = om.MFnMesh(dag)
+        mesh_name = dag.fullPathName()  # Dùng fullPathName để an toàn với object trùng tên [cite: 26]
+        uv_sets = mesh_fn.getUVSetNames()
+        if not uv_sets:
+            sel_it.next()
+            continue
+        uv_set = mesh_fn.currentUVSetName()
+        try:
+            # Lấy mảng tọa độ và ID của các Shell
+            u_array, v_array = mesh_fn.getUVs(uv_set)
+            shell_count, shell_ids = mesh_fn.getUvShellsIds(uv_set)
+        except Exception:
             sel_it.next()
             continue
 
-        mesh_name = dag.fullPathName()
-        face_it = om.MItMeshPolygon(dag)
+        # Group UV theo shell ID
+        shells = {}
+        for uv_id in range(len(u_array)):
+            shell_id = shell_ids[uv_id]
+            shells.setdefault(shell_id, []).append(uv_id)
 
-        while not face_it.isDone():
-            if not face_it.hasUVs():
-                face_it.next()
-                continue
+        bad_shells = set()
 
-            try:
-                u_array, v_array = face_it.getUVs()
-            except:
-                face_it.next()
-                continue
-
-            out_of_range = False
-
-            for u, v in zip(u_array, v_array):
-
-                # STRICT: phải nằm trong 0–1
+        # Kiểm tra từng UV trong các Shell
+        for shell_id, uv_ids in shells.items():
+            for uv_id in uv_ids:
+                u = u_array[uv_id]
+                v = v_array[uv_id]
                 if STRICT_MODE:
-                    if u < 0 or u > 1 or v < 0 or v > 1:
-                        out_of_range = True
-                        break
-
-                # UDIM mode
+                    if (u < 0.0 - EPS or u > 1.0 + EPS or
+                            v < 0.0 - EPS or v > 1.0 + EPS):
+                        bad_shells.add(shell_id)
+                        break  # Chỉ cần 1 vertex vi phạm là bắt luôn cả shell
                 else:
-                    if u < 0 or v < 0:
-                        out_of_range = True
+                    if u < 0.0 - EPS or v < 0.0 - EPS:
+                        bad_shells.add(shell_id)
                         break
+        if not bad_shells:
+            sel_it.next()
+            continue
 
-            if out_of_range:
-                err.append(f"{mesh_name}.f[{face_it.index()}]")
+        # --- TỐI ƯU CỰC MẠNH: Map Shell Lỗi Trở Lại Face ---
+        try:
+            # Lấy số lượng UV per face (uv_counts) và ID của từng UV theo thứ tự face (face_uv_ids)
+            uv_counts, face_uv_ids = mesh_fn.getAssignedUVs(uv_set)
+            uv_index = 0
+            for face_id, count in enumerate(uv_counts):
+                face_is_bad = False
+                for _ in range(count):
+                    uv_id = face_uv_ids[uv_index]
 
-            face_it.next()
+                    # Nếu UV này thuộc về một shell nằm trong danh sách đen
+                    if not face_is_bad and shell_ids[uv_id] in bad_shells:
+                        face_is_bad = True
+                    uv_index += 1
 
+                # Báo lỗi nguyên mặt đó
+                if face_is_bad:
+                    error_faces.add(f"{mesh_name}.f[{face_id}]")
+        except Exception:
+            pass
         sel_it.next()
+    return list(error_faces)
 
-    return list(set(err))
 
 
-# =========================
-# FIX
-# =========================
 def fix(*args):
     print('UV Out of Range cannot be auto-fixed safely.')
     return 1
 
 
-# =========================
-# DOC / REPORT
-# =========================
+
 def doc(*args):
     return (
         'UV OutRange:\n'

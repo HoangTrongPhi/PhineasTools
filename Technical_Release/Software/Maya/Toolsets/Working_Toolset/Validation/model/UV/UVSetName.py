@@ -3,7 +3,6 @@
     Author: HOÀNG TRỌNG PHI
     Date: 23/4/2026
     Maya 2026+ (Python 3)
-
     note: UV set name Default phải là map1
 """
 
@@ -13,46 +12,30 @@ name = 'UVset Name'
 check = 1
 fixAble = 1
 
-
-# =========================
-# CORE
-# =========================
 def _get_mesh_shapes(nodes):
     """Get all mesh shapes from given transform nodes"""
     shapes = cmds.listRelatives(nodes, shapes=True, fullPath=True) or []
     return cmds.ls(shapes, type='mesh') or []
 
-
 def _get_uv_sets(mesh):
     """Safe get uv sets"""
     return cmds.polyUVSet(mesh, q=True, allUVSets=True) or []
 
-
-# =========================
-# CHECK
-# =========================
 def run(nodes, selectionMesh):
     print(f'Running {__name__}')
-
     err = []
     meshes = _get_mesh_shapes(nodes)
-
     for mesh in meshes:
         uv_sets = _get_uv_sets(mesh)
-
         if not uv_sets:
             continue
 
         # Rule: UV set đầu tiên phải là map1
         if uv_sets[0] != 'map1':
             err.append(mesh)
-
     return list(set(err))
 
 
-# =========================
-# FIX
-# =========================
 def fix(*args):
     print('Fixing UVset Name...')
 

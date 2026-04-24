@@ -155,6 +155,7 @@ class ValidationControl(QtWidgets.QMainWindow):
 
             # --- UV Mapping ---
             self.ui.chbx_MisUV: (self.checkMissUV, self.ui.fr_MisUV),
+            self.ui.chbx_MoreUV: (self.checkMoreThan1UVset, self.ui.fr_MoreUV),
             self.ui.chbx_OverlapUV: (self.checkOverlapUV, self.ui.fr_OverlapUV),
             self.ui.chbx_InvertedUV: (self.checkUVInverted, self.ui.fr_InvertedUV),
             self.ui.chbx_UVOutRange: (self.checkUVOutRange, self.ui.fr_UVOutRange),
@@ -184,6 +185,7 @@ class ValidationControl(QtWidgets.QMainWindow):
 
         #---- UV ----
         self.ui.btnCh_MisUV.clicked.connect(self.runCheckMissUV)
+        self.ui.btnCh_MoreUV.clicked.connect(self.runCheckMoreThan1UVset)
         self.ui.btnCh_Overlap.clicked.connect(self.runOverlapUV)
         self.ui.btnCh_InvertedUV.clicked.connect(self.runUVInverted)
         self.ui.btnCh_UVOutRange.clicked.connect(self.runUVOutRange)
@@ -263,31 +265,31 @@ class ValidationControl(QtWidgets.QMainWindow):
             self.setStatus(self.ui.fr_MisUV, "warning")
 
     def runCheckMoreThan1UVset(self):
-        if self.ui.chbx_MisUV.isChecked():
+        if self.ui.chbx_MoreUV.isChecked():
             self.checkMoreThan1UVset()
         else:
             self.setStatus(self.ui.fr_MoreUV, "warning")
 
     def runOverlapUV(self):
-        if self.ui.chbx_MisUV.isChecked():
+        if self.ui.chbx_OverlapUV.isChecked():
             self.checkOverlapUV()
         else:
             self.setStatus(self.ui.fr_OverlapUV, "warning")
 
     def runUVInverted(self):
-        if self.ui.chbx_MisUV.isChecked():
+        if self.ui.chbx_InvertedUV.isChecked():
             self.checkUVInverted()
         else:
             self.setStatus(self.ui.fr_InvertedUV, "warning")
 
     def runUVOutRange(self):
-        if self.ui.chbx_MisUV.isChecked():
+        if self.ui.chbx_UVOutRange.isChecked():
             self.checkUVOutRange()
         else:
             self.setStatus(self.ui.fr_UVOutRange, "warning")
 
     def runUVSetName(self):
-        if self.ui.chbx_MisUV.isChecked():
+        if self.ui.chbx_UVSetName.isChecked():
             self.checkUVSetName()
         else:
             self.setStatus(self.ui.fr_UVSetName, "warning")
