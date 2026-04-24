@@ -116,12 +116,10 @@ class ValidationControl(QtWidgets.QMainWindow):
         self.setObjectName("ValidationControl_window")
         self.setWindowTitle("ValidationTool")
 
-
         # Kết nối các tín hiệu (signal) từ widget tới các hàm (slot)
         self.createConnection()
         self.initState()
         self.buildCheckMap()
-
 
     # ===============================
     # INIT
@@ -141,10 +139,8 @@ class ValidationControl(QtWidgets.QMainWindow):
             self.ui.fr_UVOutRange,
             self.ui.fr_UVSetName,
         ]
-
         for fr in frames:
             self.setStatus(fr, None)  # reset (xám)
-
     def buildCheckMap(self):
         """Map checkbox → function → frame"""
         self.checkMap = {

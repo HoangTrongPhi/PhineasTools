@@ -20,38 +20,30 @@ def run(nodes=None, selectionMesh=None):
     Kiểm tra các file texture bị missing trong scene
     """
     print(f'Running {__name__}')
-
     err = []
 
     # Lấy tất cả file texture node (ổn định hơn textures=True)
     file_nodes = cmds.ls(type='file') or []
-
     for node in file_nodes:
         attr = f"{node}.fileTextureName"
 
         # Skip nếu attr không tồn tại
         if not cmds.objExists(attr):
             continue
-
         try:
             file_path = cmds.getAttr(attr)
         except Exception:
             continue
-
         # Skip nếu path rỗng
         if not file_path:
             continue
-
         # Normalize path (tránh lỗi slash)
         file_path = os.path.normpath(file_path)
-
         # Check tồn tại
         if not os.path.exists(file_path):
             err.append(node)
-
     # Remove duplicate (nếu có)
     return list(set(err))
-
 
 def fix(*args):
     """
