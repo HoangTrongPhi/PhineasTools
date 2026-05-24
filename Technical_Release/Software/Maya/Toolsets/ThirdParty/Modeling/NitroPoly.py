@@ -183,7 +183,7 @@ class NP():
         minClr = color01(63, 72, 82)
         devClr = color01(11, 18, 28)
 
-        # Window and dock control creation
+        # Window and dock Controller creation
         WinNitroPoly = cmds.window('winModelingToolkit', title='NitroPoly 1.1', wh=[1000, 300], mxb=0, mnb=0, rtf=1)
         modelLayout = cmds.columnLayout(adjustableColumn=True, parent='winModelingToolkit')
         cmds.dockControl("Nitropoly", nbg=0, area='left', l="Nitropoly 2.0", content='winModelingToolkit',

@@ -34,7 +34,7 @@ importlib.reload(NamingConvention)
 import Software.Maya.Toolsets.Working_Toolset.Teleport.UI.TeleportTool_UI as TeleportTool_UI
 importlib.reload(TeleportTool_UI)
 
-#file model
+#file Model
 import Software.Maya.Toolsets.Working_Toolset.Teleport.model.TeleportFBX as TeleportFBX
 importlib.reload(TeleportFBX)
 

@@ -220,11 +220,11 @@ class Asset_Libs_Control(QtWidgets.QMainWindow):
         self.dialog.exec()
 
 
-    # -------- Categories control --------
+    # -------- Categories Controller --------
     def Categories_control(self):
-        # Tạo đối tượng categories control, gắn vào listView_Categories
+        # Tạo đối tượng categories Controller, gắn vào listView_Categories
         self.categories_view = Categories.Categories(self.ui.listView_Categories)
-        self.ui.listView_Categories.setModel(self.categories_view.model)  # Đảm bảo model gắn đúng
+        self.ui.listView_Categories.setModel(self.categories_view.model)  # Đảm bảo Model gắn đúng
 
         # Kết nối signal: Khi chọn category ở listView, filter asset trên table
         self.categories_view.category_selected.connect(self.on_category_selected)

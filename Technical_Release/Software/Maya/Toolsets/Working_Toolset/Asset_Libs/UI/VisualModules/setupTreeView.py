@@ -187,7 +187,7 @@ class FolderTreeView(QTreeView):
                                     )
             except Exception as e:
                 QMessageBox.warning(self, "Error", f"Could not rename folder:\n{str(e)}")
-        # Reset lại model về parent_dir
+        # Reset lại Model về parent_dir
         self.reset_filesystem_model(parent_dir)
 
 

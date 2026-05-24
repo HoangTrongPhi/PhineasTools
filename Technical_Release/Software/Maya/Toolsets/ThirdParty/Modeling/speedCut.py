@@ -7394,7 +7394,7 @@ def howInstructions():
     instructions = '''
     1. After press icon, A yellow grid will be shown; 
         2D mode, this is the time to adjust the camera angle.
-        3D/OrthoGraphic mode, click and drag yellow grid on the model.
+        3D/OrthoGraphic mode, click and drag yellow grid on the Model.
     
     2. Adjust grid size, rotation, and visibility via UI.
     

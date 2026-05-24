@@ -162,7 +162,7 @@ class Categories(QListView):
         new_categories = self.model.stringList()
         # Kiểm tra trùng tên (số lượng phần tử phải = số lượng set)
         if len(new_categories) != len(set(new_categories)):
-            # Nếu trùng, revert lại model cũ và báo lỗi
+            # Nếu trùng, revert lại Model cũ và báo lỗi
             QMessageBox.warning(self, "Duplicate", "Category đã tồn tại.")
             self.model.setStringList(self._old_categories)
         else:
