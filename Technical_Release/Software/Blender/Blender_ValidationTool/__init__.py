@@ -11,12 +11,20 @@ import importlib
 
 # ---- Modules ----
 from . import   Config, Status, Properties
-from .Controller import Refresh, RunAll, RunSingle
+from .Controller import Refresh, RunAll, RunSingle, UnhideHidden, ApplyHistory
+from .Model.Geometry import Concave, LaminaFaces, OverlapVertex
+from .Model.UV import Multi_UVset
+from .Model.Scene import HiddenObject
 
 # Dev hot-reload. Set DEV_MODE = False when shipping.
+# Phải reload các module Model TRƯỚC Config vì Config bind hàm vào dispatch
+# table; nếu Config reload trước, nó nhặt phiên bản cũ của Concave/... rồi
+# cache lại bản cũ vào CHECK_FUNCTIONS / CHECK_HIGHLIGHT_FUNCTIONS.
 DEV_MODE = True
 if DEV_MODE:
-    for _m in (Config, Status, Properties, Refresh, RunAll, RunSingle):
+    for _m in (Concave, LaminaFaces, OverlapVertex, Multi_UVset, HiddenObject,
+               Config, Status, Properties, UnhideHidden, ApplyHistory,
+               Refresh, RunAll, RunSingle):
         importlib.reload(_m)
 
 # =========================================================
@@ -27,7 +35,7 @@ class VALIDATION_PT_panel(bpy.types.Panel):
     bl_idname = "VIEW3D_PT_validation_tools"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
-    bl_category = "Check QC"
+    bl_category = "Validation Tools"
 
     def draw(self, context):
         layout = self.layout
@@ -50,8 +58,6 @@ class VALIDATION_PT_panel(bpy.types.Panel):
         row = layout.row(align=True)
 
         status = getattr(props, f"stt_{key}", Status.STATUS_NONE)
-        if status == Status.STATUS_ERROR:
-            row.alert = True
 
         row.prop(props, key, text="")
         row.label(text=label)
@@ -66,7 +72,7 @@ class VALIDATION_PT_panel(bpy.types.Panel):
 # =========================================================
 # Each module owns its own register/unregister. The UI file only
 # orchestrates the call order.
-_MODULES = (Properties, Refresh, RunAll, RunSingle)
+_MODULES = (Status, Properties, UnhideHidden, ApplyHistory, Refresh, RunAll, RunSingle)
 
 
 def register():

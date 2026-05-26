@@ -1,99 +1,97 @@
 # -*- coding: utf-8 -*-
 """
-Blender_ValidationTool/Model/Geometry/Concave.py
+Blender_ValidationTool/Model/Geometry/LaminaFaces.py
 
-Check Concave Faces - module thuộc tầng Model của hệ thống validation.
+Check Lamina Faces - module thuộc tầng Model của hệ thống validation.
 
-Một polygon là convex khi tất cả các đỉnh đều "rẽ cùng một hướng" khi đi
-dọc theo chu vi. Nếu có bất kỳ đỉnh nào "rẽ ngược chiều" thì polygon đó
-là concave.
+Lamina Faces (theo định nghĩa Maya): các face chồng/duplicate lên nhau,
+biểu hiện qua việc 2+ face cùng dùng chung một dải cạnh liền nhau trên
+chu vi của chúng.
 
-Lưu ý: Tam giác KHÔNG BAO GIỜ concave. Nếu mesh đã bị triangulate
-(import từ FBX/GLTF/OBJ, hoặc đã chạy Triangulate modifier) thì hàm
-này sẽ không tìm thấy concave face nào. Hãy dissolve về n-gon trước.
+Điều kiện phát hiện:
+    Đi dọc chu vi của mỗi face, nếu tồn tại CỬA SỔ TRƯỢT gồm
+    MIN_CHAIN_LENGTH cạnh liên tiếp mà tất cả các cạnh trong cửa sổ
+    đều được dùng chung bởi ÍT NHẤT MỘT face khác -> đánh dấu cả face
+    hiện tại lẫn (các) face kia là Lamina.
+
+    Mặc định MIN_CHAIN_LENGTH = 3 (giống Maya Cleanup > Lamina Faces).
 
 API:
 
     check_object(obj) -> list[int] | None
-        PURE CHECK - đăng ký trong Config.CHECK_FUNCTIONS["geo_concave"].
+        PURE CHECK - đăng ký trong Config.CHECK_FUNCTIONS["geo_lamina"].
         - list rỗng []         : mesh sạch.
-        - list các face index  : các face bị concave.
+        - list các face index  : các face bị lamina.
         - None                 : obj không hợp lệ.
 
     check_and_highlight(objs) -> dict[str, list[int]] | None
         WORKFLOW UI - dùng khi user click "Run Check".
             1. (Tiền điều kiện) User chọn 1 hoặc nhiều mesh ở Object Mode.
-               Các loại object khác (Light/Camera/Empty/...) đã được lọc
-               bỏ ở tầng Controller, hàm này nhận một list mesh đã sạch.
+               Các loại object khác đã được lọc bỏ ở tầng Controller.
             2. Tự động chạy 3-6.
             3. Multi-object Edit Mode + Face Select + Select All.
             4. Chạy check_object() cho từng obj.
-            5. Select concave trên tất cả mesh, hide convex
-               (mesh.hide(unselected=True) hoạt động trên multi-obj edit).
+            5. Select lamina trên các mesh, hide phần còn lại.
             6. Khi user Tab về Object Mode -> reveal all trên mọi mesh
                đã track qua msgbus.
 
         Returns
         -------
         dict[str, list[int]] | None
-            - None                   : input rỗng / không có mesh hợp lệ.
-            - {} (dict rỗng)         : tất cả mesh đều sạch.
-            - {obj_name: [idx,...]}  : mesh có concave face, chỉ chứa
-              các obj có lỗi.
+            None / {} / {obj_name: [face_idx,...]}.
 """
 
 import bpy
 import bmesh
 
 
-# Ngưỡng tương đối: dot/(|e1|*|e2|) ~ sin(angle).
-# 1e-6 ~ 0.00006 độ, đủ chặt để bỏ qua mấy điểm gần thẳng hàng do float noise.
-EPS = 1e-6
+# Số cạnh liên tiếp tối thiểu để coi là Lamina. Giữ = 3 để khớp Maya.
+MIN_CHAIN_LENGTH = 3
 
 
 # ---------------------------------------------------------------------------
 # Core algorithm
 # ---------------------------------------------------------------------------
-def is_face_concave(face):
+def find_lamina_face_indices(bm, min_chain=MIN_CHAIN_LENGTH):
     """
-    Kiểm tra một bmesh face có concave không.
+    Tìm tất cả face index là Lamina Faces.
 
-    Đi dọc theo chu vi, tại mỗi đỉnh tính cross(edge_vào, edge_ra) rồi
-    dot với face.normal để biết "rẽ trái hay phải". Nếu chu vi đổi dấu
-    giữa chừng -> concave.
+    Thuật toán: với mỗi face, đi dọc chu vi (cyclic) và kiểm tra mọi
+    cửa sổ trượt gồm `min_chain` cạnh liên tiếp. Nếu tồn tại 1 face
+    khác cùng chia sẻ tất cả các cạnh trong cửa sổ -> cả 2 đều lamina.
+
+    Trả về set[int] các face index.
     """
-    verts = [v.co for v in face.verts]   # không cần .copy(), chỉ đọc
-    n = len(verts)
-    if n < 4:
-        # Tam giác (hoặc ít hơn) không thể concave.
-        return False
+    lamina = set()
 
-    normal = face.normal
-    sign = None
+    for face in bm.faces:
+        loops = face.loops
+        n = len(loops)
+        if n < min_chain:
+            continue
 
-    for i in range(n):
-        v0 = verts[(i - 1) % n]
-        v1 = verts[i]
-        v2 = verts[(i + 1) % n]
-        edge1 = v1 - v0
-        edge2 = v2 - v1
-        cross = edge1.cross(edge2)
-        dot = cross.dot(normal)
+        # face.edges thông qua loops giữ đúng thứ tự cyclic quanh face.
+        ring = [loop.edge for loop in loops]
+        f_idx = face.index
 
-        # Ngưỡng tương đối theo độ dài cạnh -> không phụ thuộc scale mesh.
-        denom = edge1.length * edge2.length
-        if denom < 1e-12:
-            continue  # cạnh suy biến (2 đỉnh trùng nhau)
-        if abs(dot) / denom < EPS:
-            continue  # 3 điểm gần như thẳng hàng -> bỏ qua
+        for start in range(n):
+            # Lấy giao của (link_faces - {face hiện tại}) trên min_chain cạnh.
+            common = None
+            for k in range(min_chain):
+                edge = ring[(start + k) % n]
+                others = {f.index for f in edge.link_faces if f.index != f_idx}
+                if not others:
+                    common = None
+                    break
+                common = others if common is None else (common & others)
+                if not common:
+                    break
 
-        current_sign = dot > 0
-        if sign is None:
-            sign = current_sign
-        elif sign != current_sign:
-            return True
+            if common:
+                lamina.add(f_idx)
+                lamina.update(common)
 
-    return False
+    return lamina
 
 
 # ---------------------------------------------------------------------------
@@ -106,18 +104,16 @@ def check_object(obj):
     Returns
     -------
     list[int] | None
-        - List index các face bị concave (rỗng nghĩa là sạch).
+        - List index các face bị lamina (rỗng nghĩa là sạch).
         - None nếu obj không hợp lệ.
     """
     if obj is None or obj.type != 'MESH' or obj.data is None:
         return None
 
     me = obj.data
-
     if len(me.polygons) == 0:
         return []
 
-    # Edit Mode dùng bmesh sống; Object Mode dùng bmesh tạm và free sau.
     if obj.mode == 'EDIT':
         bm = bmesh.from_edit_mesh(me)
         owned = False
@@ -128,7 +124,8 @@ def check_object(obj):
 
     try:
         bm.faces.ensure_lookup_table()
-        return [f.index for f in bm.faces if is_face_concave(f)]
+        bm.edges.ensure_lookup_table()
+        return sorted(find_lamina_face_indices(bm))
     finally:
         if owned:
             bm.free()
@@ -138,15 +135,12 @@ def check_object(obj):
 # Workflow: Run check + isolate error faces + auto-reveal on Tab
 # ===========================================================================
 #
-# Watcher (step 6):
+# Watcher (step 6) - giống Concave.py:
 #   - msgbus subscribe vào property `mode` của object đang track.
 #   - Khi user Tab -> mode đổi -> callback chạy.
 #   - Callback reveal all (set hide=False trên mesh data) rồi unsubscribe.
-#   - Lý do không gọi bpy.ops.mesh.reveal(): op đó chỉ work trong Edit Mode,
-#     nhưng lúc callback fire thì mode đã sang OBJECT rồi. Set .hide trực
-#     tiếp trên data làm chính xác cùng việc với reveal().
 
-_state_owner = object()      # owner id cho msgbus (chỉ cần unique)
+_state_owner = object()
 _watched_obj_names = []      # list tên object đang track, [] nếu không track
 
 
@@ -161,7 +155,6 @@ def _reveal_all(obj):
         v.hide = False
     me.update()
 
-    # Bắt 3D View vẽ lại để thấy ngay.
     wm = bpy.context.window_manager
     if wm is not None:
         for window in wm.windows:
@@ -171,13 +164,7 @@ def _reveal_all(obj):
 
 
 def _on_mode_change():
-    """Msgbus callback - được gọi khi property `mode` của bất kỳ obj nào đổi.
-
-    Trong multi-object edit, tất cả mesh thoát Edit cùng lúc khi user Tab.
-    Callback có thể fire 1 lần/obj; ta chờ đến khi KHÔNG còn obj nào đang
-    Edit mới reveal + cleanup. Các lần fire trùng sau khi cleanup được
-    chặn bởi guard `_watched_obj_names` rỗng.
-    """
+    """Reveal khi mọi mesh đã track đều thoát Edit Mode."""
     global _watched_obj_names
     if not _watched_obj_names:
         bpy.msgbus.clear_by_owner(_state_owner)
@@ -203,7 +190,6 @@ def _on_mode_change():
 
 
 def _watch_mode_change(objs):
-    """Subscribe vào obj.mode của mọi obj để bắt sự kiện Tab."""
     bpy.msgbus.clear_by_owner(_state_owner)
     for obj in objs:
         bpy.msgbus.subscribe_rna(
@@ -220,24 +206,17 @@ def _watch_mode_change(objs):
 def check_and_highlight(objs):
     """
     Multi-object 6-step flow:
-        1. (Tiền điều kiện) Controller đã lọc objs chỉ còn mesh hợp lệ.
-        2. Tự động thực hiện 3-6.
+        1. Controller đã lọc objs chỉ còn mesh hợp lệ.
+        2. Tự động chạy 3-6.
         3. Multi-object Edit Mode + Face Select + Select All.
         4. Per-obj: chạy check_object().
-        5. Có lỗi: deselect, select concave trên các mesh có issue,
-                   hide convex (op chạy trên multi-obj edit).
-           Sạch: về Object Mode, không hide gì.
-        6. Đăng ký watcher: Tab -> reveal all trên mọi mesh đã track.
-
-    Parameters
-    ----------
-    objs : list[bpy.types.Object]
-        Danh sách mesh đã được Controller lọc (chỉ type=='MESH', data!=None).
+        5. Có lỗi: select lamina trên các mesh có issue, hide phần còn lại.
+           Sạch: về Object Mode.
+        6. Watcher: Tab -> reveal all.
 
     Returns
     -------
     dict[str, list[int]] | None
-        None / {} / {obj_name: [face_idx,...]}.
     """
     global _watched_obj_names
 
@@ -251,14 +230,12 @@ def check_and_highlight(objs):
     if not valid_objs:
         return None
 
-    # Đảm bảo Object Mode trước khi multi-select + enter edit.
     if bpy.context.mode != 'OBJECT':
         try:
             bpy.ops.object.mode_set(mode='OBJECT')
         except RuntimeError:
             pass
 
-    # Set selected cho tất cả + giữ active cũ nếu hợp lệ, ngược lại lấy obj đầu.
     try:
         for o in valid_objs:
             o.select_set(True)
@@ -268,25 +245,21 @@ def check_and_highlight(objs):
     except (RuntimeError, ReferenceError):
         return None
 
-    # ---- Step 3: Edit Mode + Face Select + Select All ----
     bpy.ops.object.mode_set(mode='EDIT')
     bpy.ops.mesh.select_mode(type='FACE')
     bpy.ops.mesh.select_all(action='SELECT')
 
-    # ---- Step 4: chạy check trên từng obj ----
     issues = {}
     for obj in valid_objs:
         result = check_object(obj)
         if result:
             issues[obj.name] = result
 
-    # ---- Step 5: isolate hoặc thoát ----
     if not issues:
         bpy.ops.mesh.select_all(action='DESELECT')
         bpy.ops.object.mode_set(mode='OBJECT')
         return {}
 
-    # Có lỗi: deselect rồi select concave trên các mesh tương ứng.
     bpy.ops.mesh.select_all(action='DESELECT')
 
     selected_any = False
@@ -309,7 +282,6 @@ def check_and_highlight(objs):
 
     bpy.ops.mesh.hide(unselected=True)
 
-    # ---- Step 6: watch Tab để reveal ----
     _watched_obj_names = [o.name for o in valid_objs]
     _watch_mode_change(valid_objs)
 
@@ -323,13 +295,13 @@ if __name__ == "__main__":
     _objs = [o for o in bpy.context.selected_objects if o.type == 'MESH']
     _result = check_and_highlight(_objs)
     if _result is None:
-        print("[Concave] Không có mesh hợp lệ trong selection.")
+        print("[Lamina] Không có mesh hợp lệ trong selection.")
     elif not _result:
-        print(f"[Concave] {len(_objs)} mesh: tất cả sạch.")
+        print(f"[Lamina] {len(_objs)} mesh: tất cả sạch.")
     else:
         total = sum(len(v) for v in _result.values())
-        print(f"[Concave] {total} concave face(s) trên {len(_result)} mesh:")
+        print(f"[Lamina] {total} lamina face(s) trên {len(_result)} mesh:")
         for name, idxs in _result.items():
             preview = idxs if len(idxs) <= 20 else idxs[:20] + ['...']
             print(f"  - {name}: {preview}")
-        print("[Concave] Nhấn Tab để reveal lại toàn bộ mesh.")
+        print("[Lamina] Nhấn Tab để reveal lại toàn bộ mesh.")
